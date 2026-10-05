@@ -794,6 +794,45 @@
             </div>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q10: How does the "🎨 BG" background color customizer menu work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Located right before the Dark/Light Mode button on the top control bar, the <span class="code-inline">🎨 BG</span> menu allows you to personalize your workspace background color:
+              <ul>
+                <li><strong>Subtle Tint Presets:</strong> Choose from carefully calibrated presets like <em>🔹 Slate Navy</em>, <em>🌿 Forest Mint</em>, <em>💜 Soft Lavender</em>, <em>☕ Warm Sand</em>, <em>🌊 Ocean Cyan</em>, or <em>🌑 Deep Carbon / Pure White</em>.</li>
+                <li><strong>🎨 Pick Custom Color...:</strong> Opens a full-spectrum color dialog to select any custom background tint or hex code you prefer.</li>
+                <li><strong>↺ Reset to Default:</strong> Instantly returns your background to the default dark or light theme canvas.</li>
+              </ul>
+              Your customized background is automatically saved in cache and restored on restart.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q11: How do "Recent Presets (Last 10)" work in the Save menu?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Under the <span class="code-inline">💾 Save</span> menu:
+              <ul>
+                <li><strong>Save Current as Named Preset...:</strong> Prompts you for a friendly name (e.g., <em>Work</em>, <em>Video Editing</em>, <em>Daily</em>) and creates a designated backup file in your user profile.</li>
+                <li><strong>Automatic Recent List:</strong> The last 10 exported, imported, or saved preset files are automatically tracked and displayed as quick-load items under <span class="code-inline">── Recent Presets (Last 10) ──</span>.</li>
+                <li><strong>Instant Switching:</strong> Clicking any preset in the list immediately loads all shortcuts from that preset and updates your view seamlessly.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- TAB 3: CARDS & SHORTCUTS -->
@@ -849,8 +888,10 @@
                 <li><strong>Open / Launch:</strong> Opens the folder or executes the file.</li>
                 <li><strong>Pin to Top / Unpin:</strong> Locks or unlocks the shortcut to the top.</li>
                 <li><strong>Rename:</strong> Assigns a friendly custom display name to the card without altering the actual filesystem directory name.</li>
+                <li><strong>Assign Shortcut Key:</strong> Assigns a fast keyboard hotkey (e.g. Ctrl+1, Ctrl+Alt+F, F2) to launch this item anytime.</li>
+                <li><strong>Create Desktop Shortcut:</strong> Generates a standard Windows desktop shortcut (.lnk) on your Desktop.</li>
                 <li><strong>Copy Path:</strong> Copies the full filesystem path to your Windows clipboard.</li>
-                <li><strong>Remove Shortcut:</strong> Deletes the shortcut card.</li>
+                <li><strong>Remove Shortcut:</strong> Prompts for confirmation before safely removing the shortcut card.</li>
               </ul>
             </div>
           </div>
@@ -870,6 +911,59 @@
                 <li><strong>Grid View (205x105):</strong> Multi-column rectangular cards featuring proportional icons, bold title, single-line middle-elided path, and usage statistics. Best for large desktop monitors.</li>
                 <li><strong>List View (Auto 100% Wide):</strong> Horizontal full-width rows with a prominent 40px icon on the left, followed by title, full path, and usage statistics stacked neatly. Ideal for compact or dense directory overviews.</li>
               </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q14: How do I assign a keyboard shortcut (Hotkey) or create a Desktop shortcut?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Right-click on any card to access advanced shortcut options:
+              <ul>
+                <li><strong>⌨️ Assign Shortcut Key...:</strong> Assigns a fast keyboard hotkey (such as <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Ctrl+Alt+D</span>, or <span class="code-inline">F2</span>). Whenever iROP Quick Access is active, pressing that key combination immediately launches that folder or app. An indicator badge (e.g. <span class="code-inline">[Ctrl+1]</span>) is displayed on the card footer.</li>
+                <li><strong>🖥️ Create Desktop Shortcut:</strong> Generates a standard Windows shortcut file (<span class="code-inline">.lnk</span>) directly on your Windows Desktop for that location.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q15: How does the new Live Open Windows Folders dock (200x40) work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              At the very bottom of the screen sits the dedicated <strong>📂 Open Windows Folders (Live Auto-Detect)</strong> dock:
+              <ul>
+                <li><strong>Live Auto-Detect:</strong> A background monitor continuously tracks currently open File Explorer folders on your Windows taskbar every 2.5 seconds.</li>
+                <li><strong>200x40 Compact Cards:</strong> Each detected window appears as a compact 200px wide by 40px high card showing the folder icon, folder name, and directory path.</li>
+                <li><strong>Click to Focus:</strong> Clicking any mini card brings that already-opened Windows Explorer window directly to the front.</li>
+                <li><strong>Add with '+':</strong> Clicking the small <span class="code-inline">＋</span> button on any mini card instantly pins that folder into your main shortcut grid above.</li>
+                <li><strong>Visible Deep Gray Scrollbar:</strong> When multiple folders are open, a deep gray horizontal scrollbar appears for smooth scrolling across all active folders.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q16: Does the card cross (✕) button ask for confirmation before deleting?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Accidental Delete Protection:</strong> Yes! Clicking the <span class="code-inline">✕</span> button on the top-right of any card (or selecting "Remove Shortcut" from the right-click menu) prompts you with an explicit confirmation dialog: <em>"Are you sure you want to remove '[Name]' from shortcuts?"</em>. The card is only deleted if you confirm "Yes", preventing accidental loss.
             </div>
           </div>
         </div>
@@ -920,6 +1014,54 @@
                   <td class="badge-feature">📌 Button on Card</td>
                   <td>Unpinned</td>
                   <td>Locks shortcut to stay on top regardless of recency sorting.</td>
+                </tr>
+                <tr>
+                  <td>Rename Shortcut</td>
+                  <td class="badge-feature">Right-Click &rarr; Rename</td>
+                  <td>Original Name</td>
+                  <td>Assigns a custom display name without altering the actual folder on disk.</td>
+                </tr>
+                <tr>
+                  <td>Copy Path</td>
+                  <td class="badge-feature">Right-Click &rarr; Copy Path</td>
+                  <td>—</td>
+                  <td>Copies full directory or file path to clipboard.</td>
+                </tr>
+                <tr>
+                  <td>Assign Hotkey (Shortcut Key)</td>
+                  <td class="badge-feature">Right-Click &rarr; ⌨️ Assign Shortcut Key</td>
+                  <td>—</td>
+                  <td>Binds keyboard hotkey (e.g. Ctrl+1) to launch the folder directly.</td>
+                </tr>
+                <tr>
+                  <td>Create Desktop Shortcut</td>
+                  <td class="badge-feature">Right-Click &rarr; 🖥️ Create Desktop Shortcut</td>
+                  <td>—</td>
+                  <td>Creates a standard .lnk shortcut icon directly on Windows Desktop.</td>
+                </tr>
+                <tr>
+                  <td>Card Delete Confirmation</td>
+                  <td class="badge-feature">✕ Button on Card</td>
+                  <td>Active</td>
+                  <td>Shows safety confirmation dialog before removing a card.</td>
+                </tr>
+                <tr>
+                  <td>Live Open Folders Dock (200x40)</td>
+                  <td class="badge-feature">Bottom Footer Dock</td>
+                  <td>Live (2.5s)</td>
+                  <td>Auto-detects open Explorer windows; 1-click focus or '+' add to grid.</td>
+                </tr>
+                <tr>
+                  <td>Custom Background Color</td>
+                  <td class="badge-feature">🎨 BG Menu Button</td>
+                  <td>Theme Default</td>
+                  <td>Choose elegant light/dark color tints or pick custom hex colors.</td>
+                </tr>
+                <tr>
+                  <td>Recent Presets (Last 10)</td>
+                  <td class="badge-feature">💾 Save &rarr; Recent Presets</td>
+                  <td>Auto</td>
+                  <td>Quick-load list of your last 10 exported or saved preset files.</td>
                 </tr>
                 <tr>
                   <td>Card Dimensions</td>
@@ -1139,6 +1281,44 @@
             </div>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১০: "🎨 BG" কাস্টম ব্যাকগ্রাউন্ড কালার মেনু কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              টপ কন্ট্রোল বারে ডার্ক/লাইট মোড বাটনের ঠিক আগে থাকা <span class="code-inline">🎨 BG</span> বাটন থেকে আপনি অ্যাপের ব্যাকগ্রাউন্ড কালার পরিবর্তন করতে পারবেন:
+              <ul>
+                <li><strong>কালার প্রিসেট:</strong> ডার্ক এবং লাইট উভয় মোডের সাথে মানানসই চমৎকার হালকা প্রিসেট রয়েছে (যেমন: <em>🔹 Slate Navy</em>, <em>🌿 Forest Mint</em>, <em>💜 Soft Lavender</em>, <em>☕ Warm Sand</em>, <em>🌊 Ocean Cyan</em>, <em>🌑 Deep Carbon / Pure White</em>)।</li>
+                <li><strong>🎨 Pick Custom Color...:</strong> এই অপশন দিয়ে কালার পিকার প্যালেট থেকে যেকোনো পছন্দের কালার নির্বাচন করা যায়।</li>
+                <li><strong>↺ Reset to Default:</strong> যেকোনো সময় ডিফল্ট থিম ব্যাকগ্রাউন্ডে ফিরে আসা যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১১: সেভ মেনুতে "Recent Presets (Last 10)" ফিচারের সুবিধা কী?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <span class="code-inline">💾 Save</span> মেনুর নিচে:
+              <ul>
+                <li><strong>Save Current as Named Preset...:</strong> আপনার বর্তমান শর্টকাট সেটটিকে একটি নির্দিষ্ট নামে (যেমন: <em>Work</em>, <em>Video Editing</em>, <em>Daily</em>) আলাদা প্রিসেট হিসেবে সেভ করতে পারবেন।</li>
+                <li><strong>সর্বশেষ ১০টি প্রিসেট তালিকা:</strong> আপনার তৈরি করা বা ইমপোর্ট করা সর্বশেষ ১০টি প্রিসেট স্বয়ংক্রিয়ভাবে <span class="code-inline">── Recent Presets (Last 10) ──</span> সেকশনে ক্রমানুসারে সেভ থাকে।</li>
+                <li><strong>১-ক্লিকে লোড:</strong> তালিকায় থাকা যেকোনো প্রিসেটে ক্লিক করলেই সাথে সাথে সেই সম্পূর্ণ শর্টকাটগুলো অ্যাপে লোড হয়ে যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- TAB 3: কার্ড ফিচার ও শর্টকাট -->
@@ -1194,8 +1374,10 @@
                 <li><strong>Open / Launch:</strong> সরাসরি ফোল্ডার বা ফাইল ওপেন করে।</li>
                 <li><strong>Pin to Top / Unpin:</strong> সবার ওপরে লক বা আনলক করে।</li>
                 <li><strong>Rename:</strong> ড্রাইভের মূল ফোল্ডার নেম অপরিবর্তিত রেখে কার্ডে নিজের ইচ্ছামতো সুন্দর নাম দেওয়া যায়।</li>
+                <li><strong>Assign Shortcut Key:</strong> কার্ডটিতে কিবোর্ড শর্টকাট কি (যেমন: Ctrl+1, Ctrl+Alt+F, F2) অ্যাসাইন করা যায়, যাতে কিবোর্ড চাপলেই ফোল্ডার ওপেন হয়।</li>
+                <li><strong>Create Desktop Shortcut:</strong> সরাসরি ব্যবহারকারীর উইন্ডোজ ডেস্কটপে এই ফোল্ডারের একটি (.lnk) শর্টকাট তৈরি করে দেয়।</li>
                 <li><strong>Copy Path:</strong> সম্পূর্ণ পাথ এক ক্লিকে ক্লিপবোর্ডে কপি করে।</li>
-                <li><strong>Remove Shortcut:</strong> শর্টকাটটি রিমুভ করে।</li>
+                <li><strong>Remove Shortcut:</strong> ভুলবশত ডিলিট হওয়া এড়াতে কনফার্মেশন প্রম্পট দেখিয়ে নিরাপদে শর্টকাট মুছে দেয়।</li>
               </ul>
             </div>
           </div>
@@ -1215,6 +1397,59 @@
                 <li><strong>Grid View (205x105):</strong> চারকোনা মাল্টি-কলাম কার্ড, যাতে আইকন, টাইটেল, হালকা গ্রে পাথ এবং ব্যবহারের হিসাব সুন্দরভাবে সাজানো থাকে। বড় স্ক্রিনের জন্য উপযুক্ত।</li>
                 <li><strong>List View (Auto 100% Wide):</strong> ফুল-উইডথ এক সারির তালিকা, যাতে বামে বড় ৪০px আইকন এবং পাশে টাইটেল, পাথ ও ব্যবহারের সময় পরপর সাজানো থাকে।</li>
               </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১৪: কার্ডে কিবোর্ড শর্টকাট (Hotkey) ও ডেস্কটপ শর্টকাট কীভাবে তৈরি করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              যেকোনো কার্ডের ওপর মাউসের রাইট-ক্লিক করলে নতুন দুটি পাওয়ারফুল অপশন পাওয়া যায়:
+              <ul>
+                <li><strong>⌨️ Assign Shortcut Key...:</strong> কার্ডটিতে যেকোনো কিবোর্ড হটকি (যেমন: <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Ctrl+Alt+D</span>, <span class="code-inline">F2</span>) যুক্ত করা যায়। অ্যাপ চালু থাকা অবস্থায় কিবোর্ডে উক্ত কি চাপলেই সাথে সাথে সেই ফোল্ডারটি ওপেন হয়ে যাবে। কার্ডের নিচে <span class="code-inline">[Ctrl+1]</span> ব্যাজ প্রদর্শিত হয়।</li>
+                <li><strong>🖥️ Create Desktop Shortcut:</strong> এক ক্লিকেই উক্ত ফোল্ডার বা ফাইলের জন্য আপনার উইন্ডোজ ডেস্কটপে একটি স্ট্যান্ডার্ড শর্টকাট (<span class="code-inline">.lnk</span>) ফাইল তৈরি করে দেয়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১৫: নিচে অটোমেটিক ওপেন উইন্ডোজ ডক (২০০x৪০ সাইজ) কী এবং কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              স্ক্রিনের একদম নিচের অংশে যুক্ত রয়েছে <strong>📂 Open Windows Folders (Live Auto-Detect)</strong> ডক:
+              <ul>
+                <li><strong>স্বয়ংক্রিয় লাইভ ডিটেকশন:</strong> উইন্ডোজ টাস্কবারে যেসব এক্সপ্লোরার ফোল্ডার খোলা থাকে, ব্যাকগ্রাউন্ড টাইমার প্রতি ২.৫ সেকেন্ড পর পর সেগুলো স্বয়ংক্রিয়ভাবে ডিটেক্ট করে নিচে নিয়ে আসে।</li>
+                <li><strong>২০০x৪০ কম্প্যাক্ট কার্ড:</strong> প্রতিটি খোলা উইন্ডো নিচে সুবিন্যস্ত **২০০px × ৪০px** সাইজের মিনি কার্ড হিসেবে দেখা যায়।</li>
+                <li><strong>১-ক্লিকে ফোকাস:</strong> যেকোনো মিনি কার্ডে ক্লিক করলেই উইন্ডোজে খোলা থাকা ফোল্ডারটি সরাসরি সামনে (Focus) চলে আসে।</li>
+                <li><strong>'+' বাটনে গ্রিডে যুক্ত:</strong> কার্ডের ডান পাশের <span class="code-inline">＋</span> বাটনে ক্লিক করে এক ক্লিকেই খোলা ফোল্ডারটি মূল শর্টকাট গ্রিডে স্থায়ীভাবে যোগ করা যায়।</li>
+                <li><strong>ডিপ গ্রে স্ক্রলবার:</strong> অনেক ফোল্ডার খোলা থাকলে নিচে একটি দৃশ্যমান ডিপ গ্রে স্ক্রলবার আসে যা দিয়ে সহজেই স্ক্রল করা যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১৬: কার্ডের ক্রস (✕) বাটনে ডিলিট কনফার্মেশন কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>ভুলবশত ডিলিট হওয়া রোধ:</strong> ব্যবহারকারী ভুলবশত কার্ডের <span class="code-inline">✕</span> বাটনে বা রাইট-ক্লিক মেনুর "Remove Shortcut" বাটনে ক্লিক করলে সাথে সাথে একটি সতর্কতা ডায়লগ আসবে: <em>"Are you sure you want to remove '[ফোল্ডার নাম]' from shortcuts?"</em>। আপনি <strong>Yes</strong> সিলেক্ট করলেই কেবল কার্ডটি রিমুভ হবে, ফলে ভুলবশত কোনো শর্টকাট মুছে যাওয়ার ভয় থাকে না।
             </div>
           </div>
         </div>
@@ -1265,6 +1500,54 @@
                   <td class="badge-feature">📌 বাটন (কার্ডের ওপরে)</td>
                   <td>আনপিন্ড</td>
                   <td>শর্টকাটটি সবার ওপরে স্থায়ীভাবে আটকে রাখে।</td>
+                </tr>
+                <tr>
+                  <td>রিনেম / কাস্টম নাম</td>
+                  <td class="badge-feature">রাইট-ক্লিক &rarr; Rename</td>
+                  <td>মূল নাম</td>
+                  <td>আসল ফোল্ডারের নাম অক্ষত রেখে কার্ডের জন্য পছন্দমতো নাম সেট করা যায়।</td>
+                </tr>
+                <tr>
+                  <td>পাথ কপি করা</td>
+                  <td class="badge-feature">রাইট-ক্লিক &rarr; Copy Path</td>
+                  <td>—</td>
+                  <td>এক ক্লিকে ফোল্ডার বা ফাইলের সম্পূর্ণ পাথ ক্লিপবোর্ডে কপি করে।</td>
+                </tr>
+                <tr>
+                  <td>কিবোর্ড শর্টকাট (Hotkey)</td>
+                  <td class="badge-feature">রাইট-ক্লিক &rarr; ⌨️ Assign Shortcut Key</td>
+                  <td>—</td>
+                  <td>কিবোর্ড কি (যেমন: Ctrl+1) চাপলেই সরাসরি ফোল্ডার ওপেন হয়।</td>
+                </tr>
+                <tr>
+                  <td>ডেস্কটপ শর্টকাট তৈরি</td>
+                  <td class="badge-feature">রাইট-ক্লিক &rarr; 🖥️ Create Desktop Shortcut</td>
+                  <td>—</td>
+                  <td>উইন্ডোজ ডেস্কটপে সরাসরি উক্ত ফোল্ডারের .lnk শর্টকাট তৈরি করে।</td>
+                </tr>
+                <tr>
+                  <td>কার্ড ডিলিট কনফার্মেশন</td>
+                  <td class="badge-feature">কার্ডের ✕ বাটন</td>
+                  <td>সক্রিয়</td>
+                  <td>ভুলবশত ডিলিট এড়াতে কনফার্মেশন প্রম্পট প্রদর্শন করে।</td>
+                </tr>
+                <tr>
+                  <td>লাইভ ওপেন ফোল্ডার্স ডক (২০০x৪০)</td>
+                  <td class="badge-feature">নিচের ফুটার ডক</td>
+                  <td>লাইভ (২.৫s)</td>
+                  <td>খোলা এক্সপ্লোরার উইন্ডো অটো-ডিটেক্ট করে ১-ক্লিকে ফোকাস বা '+' এ গ্রিডে যোগ।</td>
+                </tr>
+                <tr>
+                  <td>কাস্টম ব্যাকগ্রাউন্ড কালার</td>
+                  <td class="badge-feature">🎨 BG মেনু বাটন</td>
+                  <td>থিম ডিফল্ট</td>
+                  <td>মার্জিত কালার প্রিসেট বা কালার পিকার দিয়ে ব্যাকগ্রাউন্ড কাস্টমাইজেশন।</td>
+                </tr>
+                <tr>
+                  <td>রিসেন্ট প্রিসেট (সর্বশেষ ১০টি)</td>
+                  <td class="badge-feature">💾 Save &rarr; Recent Presets</td>
+                  <td>অটো</td>
+                  <td>সর্বশেষ ১০টি সেভ বা ইমপোর্ট করা প্রিসেটের তালিকা ও ১-ক্লিকে লোড।</td>
                 </tr>
                 <tr>
                   <td>কার্ডের সাইজ স্কেলিং</td>

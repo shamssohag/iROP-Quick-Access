@@ -103,6 +103,130 @@
       margin: 0 auto;
     }
 
+    /* ================= HIGHLIGHTED DOWNLOAD BUTTONS ================= */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      font-family: inherit;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-download-btn {
+      background: linear-gradient(135deg, #0078d7 0%, #1084e3 50%, #2563eb 100%);
+      color: #ffffff !important;
+      padding: 7px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      gap: 7px;
+      box-shadow: 0 2px 10px rgba(0, 120, 215, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .nav-download-btn:hover {
+      background: linear-gradient(135deg, #1084e3 0%, #1d72f2 50%, #1e40af 100%);
+      box-shadow: 0 4px 16px rgba(0, 120, 215, 0.6);
+      transform: translateY(-1.5px);
+    }
+
+    .nav-download-btn:active {
+      transform: translateY(0);
+    }
+
+    .dl-svg-icon {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2.3;
+    }
+
+    .hero-download-wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      margin: 18px 0 28px 0;
+    }
+
+    .hero-download-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+
+      background: linear-gradient(135deg, #0078d7 0%, #0284c7 40%, #2563eb 100%);
+      color: #ffffff !important;
+      padding: 13px 28px;
+      border-radius: 16px;
+      gap: 14px;
+      box-shadow: 0 8px 28px rgba(0, 120, 215, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 6px 24px rgba(0, 120, 215, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+      }
+      50% {
+        box-shadow: 0 10px 34px rgba(0, 120, 215, 0.65), 0 0 0 2px rgba(255, 255, 255, 0.35) inset;
+        transform: translateY(-2px);
+      }
+    }
+
+    .hero-download-btn:hover {
+      background: linear-gradient(135deg, #1084e3 0%, #0369a1 40%, #1d4ed8 100%);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 36px rgba(0, 120, 215, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.4) inset;
+      animation: none;
+    }
+
+    .hero-download-btn:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .hero-dl-icon-box {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .dl-hero-svg {
+      width: 22px;
+      height: 22px;
+      color: #ffffff;
+      stroke-width: 2.4;
+    }
+
+    .hero-dl-content {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .hero-dl-title {
+      font-size: 16.5px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+      color: #ffffff;
+    }
+
+    .hero-dl-sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 2px;
+      letter-spacing: 0.1px;
+    }
+
     /* ================= TOP NAVBAR ================= */
     .top-navbar {
       display: flex;
@@ -608,6 +732,28 @@
       <h1 class="hero-title">iROP Quick Access V.1.1</h1>
       <p id="sub-title" class="hero-subtitle">A quick solution for recent shortcut — Complete User Manual &amp; FAQ</p>
       
+      <!-- Highlighted Hero Download Form (Direct Google Drive Bypass Token) -->
+      <div class="hero-download-wrapper">
+        <form action="https://drive.usercontent.google.com/download" method="get" target="_blank" style="display: inline-block;">
+          <input type="hidden" name="id" value="119W7uadXkVcabbJsNa4OEFTM8KhUF9Ba">
+          <input type="hidden" name="export" value="download">
+          <input type="hidden" name="confirm" value="t">
+          <input type="hidden" name="authuser" value="0">
+
+          <button type="submit" class="download-btn hero-download-btn" id="hero-download-btn">
+            <div class="hero-dl-icon-box">
+              <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+            </div>
+            <div class="hero-dl-content">
+              <span class="hero-dl-title" id="hero-dl-title">Download iROP Quick Access V1.1 (.zip)</span>
+              <span class="hero-dl-sub" id="hero-dl-sub">Direct One-Click Download • Virus Scan Bypass</span>
+            </div>
+          </button>
+        </form>
+      </div>
+
       <!-- 4 Menu Tabs -->
       <div class="section-nav-wrapper">
         <button class="section-tab-btn active" id="sec-btn-guidelines" onclick="filterSections('guidelines')">
@@ -888,7 +1034,8 @@
                 <li><strong>Open / Launch:</strong> Opens the folder or executes the file.</li>
                 <li><strong>Pin to Top / Unpin:</strong> Locks or unlocks the shortcut to the top.</li>
                 <li><strong>Rename:</strong> Assigns a friendly custom display name to the card without altering the actual filesystem directory name.</li>
-                <li><strong>Assign Shortcut Key:</strong> Assigns a fast keyboard hotkey (e.g. Ctrl+1, Ctrl+Alt+F, F2) to launch this item anytime.</li>
+                <li><strong>Enable Position Change (Drag &amp; Move):</strong> Activates Rearrange Mode so you can freely drag cards with the mouse and drop them into new positions to set manual priority. When active, clicking will never accidentally launch folders, even with Single Click mode turned on!</li>
+                <li><strong>Assign Shortcut Key:</strong> Assigns a fast keyboard hotkey (e.g. Ctrl+1, Ctrl+Alt+F, F2) to launch this item anytime. Warns automatically if the key is already in use by another card.</li>
                 <li><strong>Create Desktop Shortcut:</strong> Generates a standard Windows desktop shortcut (.lnk) on your Desktop.</li>
                 <li><strong>Copy Path:</strong> Copies the full filesystem path to your Windows clipboard.</li>
                 <li><strong>Remove Shortcut:</strong> Prompts for confirmation before safely removing the shortcut card.</li>
@@ -1374,7 +1521,8 @@
                 <li><strong>Open / Launch:</strong> সরাসরি ফোল্ডার বা ফাইল ওপেন করে।</li>
                 <li><strong>Pin to Top / Unpin:</strong> সবার ওপরে লক বা আনলক করে।</li>
                 <li><strong>Rename:</strong> ড্রাইভের মূল ফোল্ডার নেম অপরিবর্তিত রেখে কার্ডে নিজের ইচ্ছামতো সুন্দর নাম দেওয়া যায়।</li>
-                <li><strong>Assign Shortcut Key:</strong> কার্ডটিতে কিবোর্ড শর্টকাট কি (যেমন: Ctrl+1, Ctrl+Alt+F, F2) অ্যাসাইন করা যায়, যাতে কিবোর্ড চাপলেই ফোল্ডার ওপেন হয়।</li>
+                <li><strong>Enable Position Change (Drag &amp; Move):</strong> মাউস দিয়ে ড্র্যাগ করে কার্ডের স্থান ও প্রায়োরিটি পরিবর্তনের মোড চালু করে। এটি চালু থাকলে সিঙ্গেল ক্লিক মোড সক্রিয় থাকলেও ভুলবশত কোনো ফোল্ডার ওপেন হবে না, নির্ভয়ে মাউস দিয়ে টেনে যেকোনো কার্ড নতুন জায়গায় বসানো যাবে। কাজ শেষে পুনরায় রাইট-ক্লিক করে মোডটি বন্ধ করা যায়।</li>
+                <li><strong>Assign Shortcut Key:</strong> কার্ডটিতে কিবোর্ড শর্টকাট কি (যেমন: Ctrl+1, F2) অ্যাসাইন করা যায়। একই কি একাধিক কার্ডে অ্যাসাইন করতে গেলে স্বয়ংক্রিয় ওয়ার্নিং অ্যালার্ট আসবে।</li>
                 <li><strong>Create Desktop Shortcut:</strong> সরাসরি ব্যবহারকারীর উইন্ডোজ ডেস্কটপে এই ফোল্ডারের একটি (.lnk) শর্টকাট তৈরি করে দেয়।</li>
                 <li><strong>Copy Path:</strong> সম্পূর্ণ পাথ এক ক্লিকে ক্লিপবোর্ডে কপি করে।</li>
                 <li><strong>Remove Shortcut:</strong> ভুলবশত ডিলিট হওয়া এড়াতে কনফার্মেশন প্রম্পট দেখিয়ে নিরাপদে শর্টকাট মুছে দেয়।</li>
@@ -1690,6 +1838,8 @@
       const lblToolbar = document.getElementById("label-toolbar");
       const lblCards = document.getElementById("label-cards");
       const lblTable = document.getElementById("label-table");
+      const heroDlTitle = document.getElementById("hero-dl-title");
+      const heroDlSub = document.getElementById("hero-dl-sub");
 
       if (lang === "bn") {
         const bnTab = document.getElementById("lang-bn");
@@ -1702,6 +1852,8 @@
         if (lblToolbar) lblToolbar.innerText = "কন্ট্রোলবার ও সেটিংস";
         if (lblCards) lblCards.innerText = "কার্ড ফিচার ও শর্টকাট";
         if (lblTable) lblTable.innerText = "রেফারেন্স টেবিল";
+        if (heroDlTitle) heroDlTitle.innerText = "iROP Quick Access V1.1 ডাউনলোড (.zip)";
+        if (heroDlSub) heroDlSub.innerText = "সরাসরি ওয়ান-ক্লিক ডাউনলোড • অটো বাইপাস টোকেন";
       } else {
         const enTab = document.getElementById("lang-en");
         const enBtn = document.getElementById("btn-en");
@@ -1713,6 +1865,8 @@
         if (lblToolbar) lblToolbar.innerText = "Toolbar & Controls";
         if (lblCards) lblCards.innerText = "Cards & Shortcuts";
         if (lblTable) lblTable.innerText = "Quick Reference";
+        if (heroDlTitle) heroDlTitle.innerText = "Download iROP Quick Access V1.1 (.zip)";
+        if (heroDlSub) heroDlSub.innerText = "Direct One-Click Download • Virus Scan Bypass";
       }
 
       filterSections(currentFilter);

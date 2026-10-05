@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iROP Quick Access V1.1 — Documentation & FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('irop_qa_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    /* ================= CSS VARIABLES & THEMES ================= */
+    :root {
+      /* Dark Theme (Default) */
+      --bg-body: #080b10;
+      --card-bg: #111622;
+      --card-border: #21262d;
+      --card-hover-border: #30363d;
+      --ans-bg: rgba(13, 17, 23, 0.75);
+      --ans-border-left: #38bdf8;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --text-answer: #c9d1d9;
+      
+      --accent-blue: #58a6ff;
+      --accent-blue-hover: #1f6feb;
+      --accent-green: #10B981;
+      --accent-cyan: #39c5cf;
+      --accent-yellow: #fbbf24;
+      --accent-red: #ef4444;
+      --code-bg: #0d1117;
+      --code-text: #58a6ff;
+      
+      --nav-bg: rgba(17, 22, 34, 0.85);
+      --nav-border: #30363d;
+      --hero-glow: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent 70%);
+      --title-gradient: linear-gradient(135deg, #ffffff 40%, #7dd3fc 100%);
+      --badge-bg: rgba(88, 166, 255, 0.12);
+      --badge-border: rgba(88, 166, 255, 0.3);
+      --toggle-btn-bg: #111622;
+      --table-header-bg: #161b22;
+      --table-row-alt: rgba(22, 27, 34, 0.4);
+    }
+
+    [data-theme="light"] {
+      /* Light Theme */
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --card-hover-border: #cbd5e1;
+      --ans-bg: #f1f5f9;
+      --ans-border-left: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-answer: #334155;
+      
+      --accent-blue: #0284c7;
+      --accent-blue-hover: #0369a1;
+      --accent-green: #059669;
+      --accent-cyan: #0891b2;
+      --accent-yellow: #d97706;
+      --accent-red: #dc2626;
+      --code-bg: #e2e8f0;
+      --code-text: #0369a1;
+      
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --nav-border: #e2e8f0;
+      --hero-glow: radial-gradient(circle at 50% -20%, rgba(2, 132, 199, 0.1), transparent 70%);
+      --title-gradient: linear-gradient(135deg, #0f172a 40%, #0369a1 100%);
+      --badge-bg: rgba(2, 132, 199, 0.08);
+      --badge-border: rgba(2, 132, 199, 0.25);
+      --toggle-btn-bg: #ffffff;
+      --table-header-bg: #f1f5f9;
+      --table-row-alt: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: 'Inter', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 24px 16px 60px 16px;
+    }
+
+    .faq-container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    /* ================= TOP NAVBAR ================= */
+    .top-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--nav-bg);
+      border: 1px solid var(--nav-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 10px 18px;
+      border-radius: 16px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+      color: var(--text-main);
+      user-select: none;
+    }
+
+    .brand-icon-box {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #0078d7, #2563eb);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 120, 215, 0.35);
+      font-size: 17px;
+    }
+
+    .brand-text span {
+      color: var(--accent-blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-switcher {
+      display: inline-flex;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      background: none;
+      color: var(--text-muted);
+      border: none;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(88, 166, 255, 0.35);
+    }
+
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--toggle-btn-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .theme-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ================= HERO HEADER ================= */
+    .hero-header {
+      position: relative;
+      text-align: center;
+      padding: 24px 16px 32px 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 160px;
+      background: var(--hero-glow);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--badge-bg);
+      color: var(--accent-blue);
+      border: 1px solid var(--badge-border);
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.4px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-cyan);
+      animation: pulseAnimation 2s infinite;
+    }
+
+    @keyframes pulseAnimation {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 1;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      margin-bottom: 10px;
+      background: var(--title-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.25;
+    }
+
+    .hero-subtitle {
+      position: relative;
+      z-index: 1;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 500;
+      max-width: 660px;
+      margin: 0 auto 20px auto;
+    }
+
+    /* ================= SECTION SWITCHER (4 TABS) ================= */
+    .section-nav-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+
+    .section-tab-btn {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .section-tab-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--text-main);
+    }
+
+    .section-tab-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 14px rgba(88, 166, 255, 0.35);
+    }
+
+    /* ================= CATEGORY TITLE ================= */
+    .category-title {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin: 30px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ================= ACCORDION ================= */
+    .faq-item {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .faq-item:hover {
+      border-color: var(--card-hover-border);
+    }
+
+    .faq-item.active {
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 18px rgba(88, 166, 255, 0.12);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 22px;
+      color: var(--text-main);
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      font-family: inherit;
+    }
+
+    .faq-question:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--text-muted);
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      color: var(--accent-blue);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: var(--ans-bg);
+    }
+
+    .faq-answer-inner {
+      padding: 16px 24px 22px 24px;
+      border-left: 4px solid var(--ans-border-left);
+      color: var(--text-answer);
+      font-size: 14.5px;
+      line-height: 1.8;
+    }
+
+    .faq-answer-inner ul, .faq-answer-inner ol {
+      margin-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .faq-answer-inner li {
+      margin-bottom: 6px;
+    }
+
+    .code-inline {
+      background: var(--code-bg);
+      padding: 2px 7px;
+      border-radius: 5px;
+      color: var(--code-text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .highlight-text-box {
+      background: rgba(56, 189, 248, 0.09);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin-top: 12px;
+      line-height: 1.8;
+    }
+
+    .highlight-lead {
+      color: #38bdf8;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    [data-theme="light"] .highlight-lead {
+      color: #0284c7;
+    }
+
+    .highlight-sub {
+      color: #10b981;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    [data-theme="light"] .highlight-sub {
+      color: #059669;
+    }
+
+    /* Reference Table */
+    .reference-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .reference-table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    .ref-table th {
+      background-color: var(--table-header-bg);
+      color: var(--text-main);
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+
+    .ref-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+      color: var(--text-answer);
+    }
+
+    .ref-table tbody tr:nth-child(even) {
+      background-color: var(--table-row-alt);
+    }
+
+    .ref-table tbody tr:hover {
+      background-color: rgba(88, 166, 255, 0.07);
+    }
+
+    .badge-feature {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-blue);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-key {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-yellow);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Visibility Controls */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section-block {
+      display: block;
+    }
+
+    .section-block.hidden-section {
+      display: none !important;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 54px;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 24px;
+      }
+      .top-navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-actions {
+        justify-content: space-between;
+      }
+      .section-tab-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      .reference-card {
+        padding: 16px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="faq-container">
+    
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+      <div class="nav-brand">
+        <div class="brand-icon-box">⚡</div>
+        <div class="brand-text">iROP <span>Quick Access V1.1</span></div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+          <button id="btn-en" class="lang-btn active" onclick="switchLanguage('en')">English</button>
+          <button id="btn-bn" class="lang-btn" onclick="switchLanguage('bn')">বাংলা</button>
+        </div>
+
+        <!-- Dark / White Mode Switcher -->
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
+          <svg id="themeIcon" class="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <span id="themeText">Light</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hero Header -->
+    <div class="hero-header">
+      <div class="badge">
+        <span class="pulse-dot"></span>
+        v1.1 Windows Workspace &amp; Shortcut Launcher
+      </div>
+      <h1 class="hero-title">iROP Quick Access V.1.1</h1>
+      <p id="sub-title" class="hero-subtitle">A quick solution for recent shortcut — Complete User Manual &amp; FAQ</p>
+      
+      <!-- 4 Menu Tabs -->
+      <div class="section-nav-wrapper">
+        <button class="section-tab-btn active" id="sec-btn-guidelines" onclick="filterSections('guidelines')">
+          <span id="label-guidelines">Getting Started</span>
+        </button>
+        <button class="section-tab-btn" id="sec-btn-toolbar" onclick="filterSections('toolbar')">
+          <span id="label-toolbar">Toolbar &amp; Controls</span>
+        </button>
+        <button class="section-tab-btn" id="sec-btn-cards" onclick="filterSections('cards')">
+          <span id="label-cards">Cards &amp; Shortcuts</span>
+        </button>
+        <button class="section-tab-btn" id="sec-btn-table" onclick="filterSections('table')">
+          <span id="label-table">Quick Reference</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- ==================== ENGLISH SECTION =================== -->
+    <!-- ======================================================== -->
+    <div id="lang-en" class="tab-content active">
+      
+      <!-- TAB 1: GETTING STARTED -->
+      <div id="en-guidelines-block" class="section-block">
+        <div class="category-title">1. Introduction &amp; Core Purpose</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q1: What is iROP Quick Access V1.1 and why was it created?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>iROP Quick Access</strong> is a lightweight, responsive desktop launcher built to eliminate the everyday frustration of repeatedly digging through "This PC", navigating deep nested subdirectories, and searching for frequently used work locations.
+              <div class="highlight-text-box">
+                <span class="highlight-lead">Drag and drop any folder, drive, application (.exe), or file directly into the app window to turn it into an instant visual shortcut card.</span>
+                <br>
+                <span class="highlight-sub">Cards automatically arrange themselves by usage frequency and recency, keeping your most active projects always within a single click.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q2: What types of items can I add to iROP Quick Access?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              iROP Quick Access is a multi-purpose shortcut hub that supports:
+              <ul>
+                <li><strong>Local Folders &amp; Subfolders:</strong> e.g., <span class="code-inline">C:\Projects\ClientWork</span>, <span class="code-inline">D:\Photos</span>.</li>
+                <li><strong>Hard Disk Drives &amp; Network Shares:</strong> e.g., <span class="code-inline">C:\</span>, <span class="code-inline">D:\</span>, <span class="code-inline">T:\Multimedia</span>, network NAS paths.</li>
+                <li><strong>Software &amp; Executables:</strong> e.g., <span class="code-inline">.exe</span> files, desktop shortcuts (<span class="code-inline">.lnk</span>), and batch scripts (<span class="code-inline">.bat</span>, <span class="code-inline">.cmd</span>).</li>
+                <li><strong>Project Files &amp; Documents:</strong> e.g., <span class="code-inline">.psd</span>, <span class="code-inline">.ai</span>, <span class="code-inline">.prproj</span>, <span class="code-inline">.xlsx</span>, <span class="code-inline">.pdf</span>, etc.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q3: How do I add new shortcuts to the app?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              You have three easy methods to add items:
+              <ol>
+                <li><strong>Drag &amp; Drop (Fastest):</strong> Drag any folder, drive, software, or document from Windows Explorer or your Desktop and drop it anywhere into the window.</li>
+                <li><strong>Top Bar Menu:</strong> Click the <span class="code-inline">➕ Add Folder/App</span> button on the top toolbar and select either <span class="code-inline">📁 Add Folder or Drive...</span> or <span class="code-inline">⚡ Add Application or File...</span>.</li>
+                <li><strong>Batch Import:</strong> Click <span class="code-inline">📥 Import Quick Access</span> or <span class="code-inline">📂 Import Open Windows</span> to import multiple locations simultaneously.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q4: What happens if an Explorer folder is already open or minimized?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Smart Window Focus:</strong> When you open a folder shortcut that is already open or minimized on your taskbar, iROP Quick Access intelligently detects the existing Explorer window, restores it from minimized state, and brings it straight to the foreground. This eliminates cluttered duplicate windows. If the folder is not currently open, it launches a fresh Explorer window.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: TOOLBAR & CONTROLS -->
+      <div id="en-toolbar-block" class="section-block hidden-section">
+        <div class="category-title">2. Top Control Bar Features</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q5: How does the "Import Quick Access" button work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Clicking <span class="code-inline">📥 Import Quick Access</span> queries the genuine Windows Quick Access shell namespace. It automatically scans all drives (<span class="code-inline">C:</span>, <span class="code-inline">D:</span>, <span class="code-inline">E:</span>, <span class="code-inline">T:</span>, etc.) and brings in all folders and partitions that you have pinned in your Windows File Explorer, marking them as pinned in iROP Quick Access.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q6: What does the "Import Open Windows" button do?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Clicking <span class="code-inline">📂 Import Open Windows</span> inspects all currently active File Explorer windows on your Windows taskbar. It instantly grabs their exact filesystem paths and registers them as shortcut cards, making it easy to capture your active multitasking session in one click.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q7: How do I switch between Single Click and Double Click mode?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              On the top control bar, select from the click mode dropdown:
+              <ul>
+                <li><strong>Single Click to Open:</strong> Opens or focuses the target folder/app immediately on a single mouse click (hyper-fast workflow).</li>
+                <li><strong>Double Click to Open:</strong> Mimics classic Windows desktop behavior, opening on double-click to prevent accidental launches.</li>
+              </ul>
+              Your preference is automatically remembered and cached.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q8: How does the Size Slider and "↺ Default" button work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The <span class="code-inline">Size:</span> slider allows you to scale the card width anywhere from <strong>150px</strong> up to <strong>355px</strong>.
+              <ul>
+                <li><strong>Adaptive Scaling:</strong> As you increase or decrease card size, the inner icons dynamically scale in proportion (from 24px up to 48px).</li>
+                <li><strong>↺ Default Button:</strong> Clicking this button immediately restores the card size to the default standard <strong>205W x 105H</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q9: How do I backup and restore my shortcuts using the Save menu?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Located between the Theme button and About button, the <span class="code-inline">💾 Save</span> dropdown menu provides:
+              <ul>
+                <li><strong>Export Shortcuts...:</strong> Saves your complete list of shortcuts, custom names, pin statuses, and click history into a portable JSON backup file.</li>
+                <li><strong>Import Shortcuts...:</strong> Restores or merges shortcuts from any previously saved backup file.</li>
+                <li><strong>Clear All Shortcuts...:</strong> Safely clears all shortcut cards after prompting for confirmation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: CARDS & SHORTCUTS -->
+      <div id="en-cards-block" class="section-block hidden-section">
+        <div class="category-title">3. Card Anatomy &amp; Advanced Actions</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q10: How does the "Pin / Lock to Top" feature work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Every card has a dedicated <span class="code-inline">📌</span> pin button on its top-right corner.
+              <ul>
+                <li>Clicking <strong>📌</strong> activates the pin, giving the card a soft accent border and highlighting the pin button.</li>
+                <li><strong>Pinned items are strictly locked to the top</strong> of the grid and list. They will never get pushed down by newly added or frequently clicked unpinned items.</li>
+                <li>Clicking the pin button again unpins the card and returns it to normal recency-based sorting.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q11: How do I remove or delete a shortcut?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Click the <span class="code-inline">✕</span> button located at the top-right corner of any card (it highlights in Windows close-red <span style="color:#ef4444; font-weight:bold;">#e81123</span> on hover). The shortcut is instantly removed from your view and saved.
+              <br><br>
+              <em>Note: Removing a shortcut only deletes the bookmark in iROP Quick Access; your actual files, folders, and drives are never touched or modified.</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q12: What options are available in the Right-Click Context Menu?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Right-clicking on any card reveals a power-user context menu:
+              <ul>
+                <li><strong>Open / Launch:</strong> Opens the folder or executes the file.</li>
+                <li><strong>Pin to Top / Unpin:</strong> Locks or unlocks the shortcut to the top.</li>
+                <li><strong>Rename:</strong> Allows assigning a friendly custom display name to the card without altering the actual filesystem directory name.</li>
+                <li><strong>Copy Path:</strong> Copies the full filesystem path (e.g. <span class="code-inline">D:\Client\Project</span>) to the Windows clipboard.</li>
+                <li><strong>Open in Terminal:</strong> Launches Windows Command Prompt (CMD) initialized directly inside that target directory.</li>
+                <li><strong>Remove Shortcut:</strong> Deletes the shortcut card.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q13: How does the Grid View compare to the List View?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              You can toggle view modes anytime via the view selector:
+              <ul>
+                <li><strong>Grid View (205x105):</strong> Multi-column rectangular cards featuring proportional icons, title, single-line middle-elided path, and usage statistics. Best for large desktop monitors.</li>
+                <li><strong>List View (Auto 100% Wide):</strong> Horizontal full-width rows with a prominent 40px icon on the left, followed by title, full path, and usage statistics stacked neatly. Ideal for compact or dense directory overviews.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: QUICK REFERENCE TABLE -->
+      <div id="en-table-block" class="section-block hidden-section">
+        <div class="category-title">4. Quick Feature &amp; Action Reference</div>
+
+        <div class="reference-card">
+          <div class="reference-table-container">
+            <table class="ref-table">
+              <thead>
+                <tr>
+                  <th>Feature / Action</th>
+                  <th>Control / Input</th>
+                  <th>Default Setting</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Add Folder or Drive</td>
+                  <td class="badge-feature">Drag &amp; Drop or ➕ Menu</td>
+                  <td>—</td>
+                  <td>Drop any directory to create a visual card instantly.</td>
+                </tr>
+                <tr>
+                  <td>Add Application / File</td>
+                  <td class="badge-feature">Drag &amp; Drop or ➕ Menu</td>
+                  <td>—</td>
+                  <td>Drop .exe, .lnk, .bat, or project documents.</td>
+                </tr>
+                <tr>
+                  <td>Import Quick Access</td>
+                  <td class="badge-feature">📥 Import Quick Access</td>
+                  <td>—</td>
+                  <td>Imports all pinned items from Windows File Explorer across drives.</td>
+                </tr>
+                <tr>
+                  <td>Import Open Folders</td>
+                  <td class="badge-feature">📂 Import Open Windows</td>
+                  <td>—</td>
+                  <td>Captures all active Explorer folders from Windows taskbar.</td>
+                </tr>
+                <tr>
+                  <td>Pin / Lock to Top</td>
+                  <td class="badge-feature">📌 Button on Card</td>
+                  <td>Unpinned</td>
+                  <td>Locks shortcut to stay on top regardless of recency sorting.</td>
+                </tr>
+                <tr>
+                  <td>Card Dimensions</td>
+                  <td class="badge-feature">Size Slider (150–355px)</td>
+                  <td class="badge-key">205W x 105H</td>
+                  <td>Scales card with proportional dynamic icon resizing.</td>
+                </tr>
+                <tr>
+                  <td>Restore Default Size</td>
+                  <td class="badge-feature">↺ Default Button</td>
+                  <td>—</td>
+                  <td>Resets card scale immediately to 205x105.</td>
+                </tr>
+                <tr>
+                  <td>Click Action</td>
+                  <td class="badge-feature">Click Mode Dropdown</td>
+                  <td class="badge-key">Double Click</td>
+                  <td>Toggle between single-click and double-click to launch.</td>
+                </tr>
+                <tr>
+                  <td>Layout Switcher</td>
+                  <td class="badge-feature">View Mode Dropdown</td>
+                  <td class="badge-key">Grid View</td>
+                  <td>Switch between multi-column grid and 100% wide list view.</td>
+                </tr>
+                <tr>
+                  <td>Theme Mode</td>
+                  <td class="badge-feature">☀️ / 🌙 Theme Button</td>
+                  <td class="badge-key">Dark Mode</td>
+                  <td>Windows 10 authentic dark (#191919) and light (#e4e4e8) modes.</td>
+                </tr>
+                <tr>
+                  <td>State Caching</td>
+                  <td class="badge-feature">Automatic on Exit</td>
+                  <td class="badge-key">Enabled</td>
+                  <td>Remembers window geometry, maximized state, size, and clicks.</td>
+                </tr>
+                <tr>
+                  <td>Documentation &amp; Help</td>
+                  <td class="badge-feature">ℹ️ About &rarr; 📖 Help</td>
+                  <td>—</td>
+                  <td>Opens online documentation in your default browser.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- ==================== BENGALI SECTION =================== -->
+    <!-- ======================================================== -->
+    <div id="lang-bn" class="tab-content">
+      
+      <!-- TAB 1: সমস্ত গাইডলাইন -->
+      <div id="bn-guidelines-block" class="section-block">
+        <div class="category-title">১. পরিচিতি ও মূল উদ্দেশ্য</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১: iROP Quick Access V1.1 কী এবং এটি কেন তৈরি করা হয়েছে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>iROP Quick Access</strong> হলো একটি হালকা ও দ্রুতগতির উইন্ডোজ ডেস্কটপ শর্টকাট হাব। প্রতিদিন কাজের সময় বারবার "This PC" ওপেন করে গভীরে থাকা সাব-ফোল্ডারে গিয়ে সময় নষ্ট হওয়া রোধ করতে এটি তৈরি করা হয়েছে।
+              <div class="highlight-text-box">
+                <span class="highlight-lead">যেকোনো ফোল্ডার, ড্রাইভ, সফটওয়্যার (.exe) কিংবা ফাইল টেনে এনে অ্যাপের উইন্ডোতে ড্রপ করলেই তা তৎক্ষণাৎ ভিজ্যুয়াল কার্ডে পরিণত হয়।</span>
+                <br>
+                <span class="highlight-sub">আপনার ব্যবহারের অনুপাত ও রিকেন্সি (Most Recent) অনুযায়ী কার্ডগুলো স্বয়ংক্রিয়ভাবে সাজানো থাকে, ফলে প্রয়োজনীয় ফাইলটি সবসময় সবার উপরে থাকে।</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ২: এতে কী কী ধরণের আইটেম শর্টকাট হিসেবে যুক্ত করা যায়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              এটি একটি সার্বজনীন মাল্টি কুইক অ্যাক্সেস সিস্টেম। এতে যুক্ত করা যায়:
+              <ul>
+                <li><strong>লোকাল ফোল্ডার ও প্রজেক্ট ডিরেক্টরি:</strong> যেমন—<span class="code-inline">C:\Projects</span>, <span class="code-inline">D:\ClientWork</span>।</li>
+                <li><strong>হার্ড ড্রাইভ ও নেটওয়ার্ক ড্রাইভ:</strong> যেমন—<span class="code-inline">C:\</span>, <span class="code-inline">D:\</span>, <span class="code-inline">T:\Multimedia</span> ইত্যাদি।</li>
+                <li><strong>সফটওয়্যার ও অ্যাপ্লিকেশান:</strong> যেমন—<span class="code-inline">.exe</span> ফাইল, ডেস্কটপ শর্টকাট (<span class="code-inline">.lnk</span>) এবং ব্যাচ ফাইল (<span class="code-inline">.bat</span>)।</li>
+                <li><strong>সাধারণ ফাইল ও ডকুমেন্ট:</strong> যেমন—<span class="code-inline">.psd</span>, <span class="code-inline">.ai</span>, <span class="code-inline">.docx</span>, <span class="code-inline">.xlsx</span>, <span class="code-inline">.pdf</span> ইত্যাদি।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৩: অ্যাপে নতুন শর্টকাট কীভাবে অ্যাড করতে হয়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              আপনি ৩টি সহজ উপায়ে শর্টকাট যোগ করতে পারেন:
+              <ol>
+                <li><strong>ড্র্যাগ অ্যান্ড ড্রপ (সবচেয়ে দ্রুত):</strong> ডেস্কটপ বা ফাইল এক্সপ্লোরার থেকে যেকোনো ফোল্ডার বা ফাইল টেনে এনে উইন্ডোর ওপর ছেড়ে দিন।</li>
+                <li><strong>টপ মেনু বাটন:</strong> ওপরের <span class="code-inline">➕ Add Folder/App</span> বাটনে ক্লিক করে <span class="code-inline">📁 Add Folder or Drive...</span> অথবা <span class="code-inline">⚡ Add Application or File...</span> নির্বাচন করুন।</li>
+                <li><strong>স্বয়ংক্রিয় ইমপোর্ট:</strong> <span class="code-inline">📥 Import Quick Access</span> বা <span class="code-inline">📂 Import Open Windows</span> বাটনে এক ক্লিকেই একসাথে একাধিক শর্টকাট নিয়ে আসুন।</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৪: ফোল্ডারটি আগে থেকেই ওপেন বা মিনিমাইজ করা থাকলে কী ঘটবে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>স্মার্ট উইন্ডো ফোকাস:</strong> যদি কোনো ফোল্ডার ইতিমধ্যে টাস্কবারে ওপেন বা মিনিমাইজ করা থাকে, তবে iROP Quick Access নতুন করে কোনো ডুপ্লিকেট উইন্ডো খুলবে না। বরং বিদ্যমান মিনিমাইজড উইন্ডোটিকে সাথে সাথে স্ক্রিনের সামনে (Foreground Focus) নিয়ে আসবে। আর যদি খোলা না থাকে, তবে নতুন এক্সপ্লোরার উইন্ডোতে চালু করবে।
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: কন্ট্রোলবার ও সেটিংস -->
+      <div id="bn-toolbar-block" class="section-block hidden-section">
+        <div class="category-title">২. কন্ট্রোলবার ও সেটিংস গাইড</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৫: "Import Quick Access" বাটন কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <span class="code-inline">📥 Import Quick Access</span> বাটনে ক্লিক করলে এটি উইন্ডোজের আসল কুইক এক্সেস শেল নেমস্পেস চেক করে। আপনার পিসির বিভিন্ন ড্রাইভে (<span class="code-inline">C:</span>, <span class="code-inline">D:</span>, <span class="code-inline">E:</span>, <span class="code-inline">T:</span>) পিন করা সমস্ত ফোল্ডার স্বয়ংক্রিয়ভাবে ডিটেক্ট করে এবং সেগুলোকে সরাসরি টপে পিন করে ইমপোর্ট করে।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৬: "Import Open Windows" বাটনের কাজ কী?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              কাজের সময় আপনার টাস্কবারে বর্তমানে যেসব ফোল্ডার খোলা আছে, <span class="code-inline">📂 Import Open Windows</span> বাটনে এক ক্লিক করলেই সবগুলো খোলা উইন্ডোর পাথ একসাথে শর্টকাট হিসেবে যুক্ত হয়ে যাবে।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৭: সিঙ্গেল ক্লিক এবং ডাবল ক্লিক মোড কীভাবে পরিবর্তন করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              টপবারের ক্লিক ড্রপডাউন থেকে আপনার পছন্দমতো মোড নির্বাচন করতে পারেন:
+              <ul>
+                <li><strong>Single Click to Open:</strong> মাউসের এক ক্লিকেই ফোল্ডার বা সফটওয়্যার ওপেন হবে (দ্রুত কাজের জন্য আদর্শ)।</li>
+                <li><strong>Double Click to Open:</strong> উইন্ডোজের স্ট্যান্ডার্ড নিয়মে ডাবল ক্লিকে ওপেন হবে, যাতে ভুলবশত ক্লিক হওয়া এড়ানো যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৮: সাইজ স্লাইডার এবং "↺ Default" বাটন কীভাবে ব্যবহার করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              টপবারের <span class="code-inline">Size:</span> স্লাইডার টেনে কার্ডের প্রস্থ <strong>১৫০px থেকে ৩৫৫px</strong> পর্যন্ত ছোট-বড় করা যায়।
+              <ul>
+                <li><strong>প্রোপোরশনাল আইকন স্কেলিং:</strong> কার্ড বড় বা ছোট করার সাথে সাথে ভেতরের আইকনটিও অনুপাত অনুযায়ী ২৪px থেকে ৪৮px পর্যন্ত বড়-ছোট হয়।</li>
+                <li><strong>↺ Default বাটন:</strong> এই বাটনে চাপলে কার্ডের সাইজ মুহূর্তেই স্ট্যান্ডার্ড ডিফল্ট <strong>২০৫x১০৫</strong> সাইজে রিসেট হয়ে যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৯: Save মেনু দিয়ে কীভাবে ব্যাকআপ সেভ ও রিস্টোর করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              থিম বাটন এবং অ্যাবাউট বাটনের মাঝে থাকা <span class="code-inline">💾 Save</span> ড্রপডাউন থেকে:
+              <ul>
+                <li><strong>Export Shortcuts...:</strong> আপনার সমস্ত শর্টকাট ও ক্লিক হিস্ট্রি একটি ফাইলে ব্যাকআপ আকারে সেভ করে রাখা যায়।</li>
+                <li><strong>Import Shortcuts...:</strong> যেকোনো পূর্ববর্তী ব্যাকআপ ফাইল থেকে শর্টকাটগুলো পুনরায় ফিরিয়ে আনা যায়।</li>
+                <li><strong>Clear All Shortcuts...:</strong> কনফার্মেশন নিয়ে এক ক্লিকেই সমস্ত শর্টকাট ক্লিয়ার করা যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: কার্ড ফিচার ও শর্টকাট -->
+      <div id="bn-cards-block" class="section-block hidden-section">
+        <div class="category-title">৩. কার্ডের খুঁটিনাটি ও কনটেক্সট মেনু</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১০: "Pin / Lock to Top" ফিচারটি কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              প্রতিটি কার্ডের ওপরের ডান কোণায় একটি করে <span class="code-inline">📌</span> পিন বাটন রয়েছে।
+              <ul>
+                <li><strong>লক টু টপ:</strong> পিন বাটনে ক্লিক করলে কার্ডটির বর্ডার ও পিন হাইলাইট হয়ে যায় এবং **কার্ডটি গ্রিড বা লিস্টের সবার উপরে স্থায়ীভাবে লক হয়ে থাকে**।</li>
+                <li>অন্যান্য ফোল্ডার যতবারই ওপেন করা হোক না কেন, পিন করা ফোল্ডার কখনোই নিচে নামবে না।</li>
+                <li>পুনরায় পিন বাটনে ক্লিক করলে আনপিন হয়ে স্বাভাবিক সর্টিং অর্ডারে ফিরে যাবে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১১: কোনো শর্টকাট কীভাবে রিমুভ করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              যেকোনো কার্ডের ওপরের ডান কোণায় থাকা <span class="code-inline">✕</span> বাটনে ক্লিক করলেই শর্টকাটটি তালিকা থেকে মুছে যাবে।
+              <br><br>
+              <em>মনে রাখবেন: এটি শুধুমাত্র শর্টকাট বুকমার্কটি ডিলিট করে, আপনার আসল ফোল্ডার বা ফাইলের কোনো ক্ষতি হয় না।</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১২: রাইট-ক্লিক কনটেক্সট মেনুতে কী কী সুবিধা রয়েছে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              যেকোনো কার্ডের ওপর মাউসের রাইট-ক্লিক করলে বিশেষ মেনু পাওয়া যায়:
+              <ul>
+                <li><strong>Open / Launch:</strong> সরাসরি ফোল্ডার বা ফাইল ওপেন করে।</li>
+                <li><strong>Pin to Top / Unpin:</strong> সবার ওপরে লক বা আনলক করে।</li>
+                <li><strong>Rename:</strong> ড্রাইভের মূল ফোল্ডার নেম অপরিবর্তিত রেখে কার্ডে নিজের ইচ্ছামতো সুন্দর নাম দেওয়া যায়।</li>
+                <li><strong>Copy Path:</strong> সম্পূর্ণ পাথ এক ক্লিকে ক্লিপবোর্ডে কপি করে।</li>
+                <li><strong>Open in Terminal:</strong> সরাসরি ওই ফোল্ডারে উইন্ডোজ কমান্ড প্রম্পট (CMD) চালু করে।</li>
+                <li><strong>Remove Shortcut:</strong> শর্টকাটটি রিমুভ করে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১৩: গ্রিড ভিউ বনাম লিস্ট ভিউ এর পার্থক্য কী?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              টপ মেনু থেকে সহজেই ভিউ পরিবর্তন করা যায়:
+              <ul>
+                <li><strong>Grid View (205x105):</strong> চারকোনা মাল্টি-কলাম কার্ড, যাতে আইকন, টাইটেল, হালকা গ্রে পাথ এবং ব্যবহারের হিসাব সুন্দরভাবে সাজানো থাকে। বড় স্ক্রিনের জন্য উপযুক্ত।</li>
+                <li><strong>List View (Auto 100% Wide):</strong> ফুল-উইডথ এক সারির তালিকা, যাতে বামে বড় ৪০px আইকন এবং পাশে টাইটেল, পাথ ও ব্যবহারের সময় পরপর সাজানো থাকে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: কুইক রেফারেন্স টেবিল -->
+      <div id="bn-table-block" class="section-block hidden-section">
+        <div class="category-title">৪. কুইক ফিচার ও অ্যাকশন টেবিল</div>
+
+        <div class="reference-card">
+          <div class="reference-table-container">
+            <table class="ref-table">
+              <thead>
+                <tr>
+                  <th>ফিচার / অ্যাকশন</th>
+                  <th>কন্ট্রোল বা বাটন</th>
+                  <th>ডিফল্ট মান</th>
+                  <th>বিবরণ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ফোল্ডার বা ড্রাইভ যুক্ত করা</td>
+                  <td class="badge-feature">ড্র্যাগ অ্যান্ড ড্রপ বা ➕ মেনু</td>
+                  <td>—</td>
+                  <td>ফোল্ডার ড্রপ করলেই সরাসরি শর্টকাট কার্ড তৈরি হবে।</td>
+                </tr>
+                <tr>
+                  <td>সফটওয়্যার বা ফাইল যুক্ত করা</td>
+                  <td class="badge-feature">ড্র্যাগ অ্যান্ড ড্রপ বা ➕ মেনু</td>
+                  <td>—</td>
+                  <td>.exe, .lnk বা প্রজেক্ট ফাইল ড্রপ করে অ্যাড করা যায়।</td>
+                </tr>
+                <tr>
+                  <td>কুইক এক্সেস ইমপোর্ট</td>
+                  <td class="badge-feature">📥 Import Quick Access</td>
+                  <td>—</td>
+                  <td>উইন্ডোজ এক্সপ্লোরারে পিন করা সব ড্রাইভের ফোল্ডার ইমপোর্ট করে।</td>
+                </tr>
+                <tr>
+                  <td>ওপেন উইন্ডোজ ইমপোর্ট</td>
+                  <td class="badge-feature">📂 Import Open Windows</td>
+                  <td>—</td>
+                  <td>টাস্কবারে খোলা থাকা এক্সপ্লোরার উইন্ডোগুলো যোগ করে।</td>
+                </tr>
+                <tr>
+                  <td>পিন / লক টু টপ</td>
+                  <td class="badge-feature">📌 বাটন (কার্ডের ওপরে)</td>
+                  <td>আনপিন্ড</td>
+                  <td>শর্টকাটটি সবার ওপরে স্থায়ীভাবে আটকে রাখে।</td>
+                </tr>
+                <tr>
+                  <td>কার্ডের সাইজ স্কেলিং</td>
+                  <td class="badge-feature">Size স্লাইডার (১৫০–৩৫৫px)</td>
+                  <td class="badge-key">২০৫W x ১০৫H</td>
+                  <td>কার্ড বড় করার সাথে সাথে আইকনও অনুপাতে বড় হবে।</td>
+                </tr>
+                <tr>
+                  <td>ডিফল্ট সাইজ রিসেট</td>
+                  <td class="badge-feature">↺ Default বাটন</td>
+                  <td>—</td>
+                  <td>মুহূর্তেই সাইজকে স্ট্যান্ডার্ড ২০৫x১০৫ মাপে ফিরিয়ে আনে।</td>
+                </tr>
+                <tr>
+                  <td>ক্লিক অপশন</td>
+                  <td class="badge-feature">Click Mode ড্রপডাউন</td>
+                  <td class="badge-key">Double Click</td>
+                  <td>সিঙ্গেল বা ডাবল ক্লিকে ওপেন করার অপশন।</td>
+                </tr>
+                <tr>
+                  <td>ভিউ লেআউট</td>
+                  <td class="badge-feature">View Mode ড্রপডাউন</td>
+                  <td class="badge-key">Grid View</td>
+                  <td>গ্রিড চারকোনা কার্ড বনাম ১০০% ওয়াইড লিস্ট ভিউ।</td>
+                </tr>
+                <tr>
+                  <td>ডার্ক / লাইট থিম</td>
+                  <td class="badge-feature">☀️ / 🌙 থিম বাটন</td>
+                  <td class="badge-key">Dark Mode</td>
+                  <td>উইন্ডোজ ১০ অরিজিনাল ডার্ক ও লাইট কালার প্যালেট।</td>
+                </tr>
+                <tr>
+                  <td>অ্যাপ স্টেট ক্যাশিং</td>
+                  <td class="badge-feature">অটোমেটিক অন একজিট</td>
+                  <td class="badge-key">সক্রিয়</td>
+                  <td>পরের বার ওপেন করলে হুবহু একই অবস্থায় পাওয়া যায়।</td>
+                </tr>
+                <tr>
+                  <td>হেল্প ও গাইড</td>
+                  <td class="badge-feature">ℹ️ About &rarr; 📖 Help</td>
+                  <td>—</td>
+                  <td>সরাসরি ব্রাউজারে অনলাইন ডকুমেন্টেশন ওপেন করে।</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      Developer: Shams Sohag • 
+      <a href="https://github.com/shamssohag" target="_blank">GitHub</a> • 
+      <a href="https://www.linkedin.com/in/shamssohag/" target="_blank">LinkedIn</a>
+    </div>
+
+  </div>
+
+  <script>
+    // Accordion Logic
+    const allQuestions = document.querySelectorAll('.faq-question');
+    allQuestions.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        if (!answer) return;
+        const isActive = item.classList.contains('active');
+
+        const currentActiveTab = document.querySelector('.tab-content.active');
+        if (currentActiveTab) {
+          currentActiveTab.querySelectorAll('.faq-item').forEach(otherItem => {
+            otherItem.classList.remove('active');
+            const otherAnswer = otherItem.querySelector('.faq-answer');
+            if (otherAnswer) otherAnswer.style.maxHeight = null;
+          });
+        }
+
+        if (!isActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // 4 Menu Tabs Switcher
+    let currentFilter = 'guidelines';
+
+    function filterSections(type) {
+      currentFilter = type;
+      try {
+        localStorage.setItem('irop_qa_filter', type);
+      } catch(e) {}
+
+      document.querySelectorAll('.section-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('sec-btn-' + type);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const blocks = ['guidelines', 'toolbar', 'cards', 'table'];
+      ['en', 'bn'].forEach(lang => {
+        blocks.forEach(blk => {
+          const el = document.getElementById(`${lang}-${blk}-block`);
+          if (el) {
+            if (blk === type) {
+              el.classList.remove('hidden-section');
+            } else {
+              el.classList.add('hidden-section');
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll('.faq-item.active .faq-answer').forEach(ans => {
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      });
+
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    // Language Switcher
+    function switchLanguage(lang) {
+      try {
+        localStorage.setItem('irop_qa_lang', lang);
+      } catch(e) {}
+
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.remove('active');
+        el.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+          const ans = item.querySelector('.faq-answer');
+          if (ans) ans.style.maxHeight = null;
+        });
+      });
+      
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+
+      const subTitle = document.getElementById('sub-title');
+      const lblGuidelines = document.getElementById('label-guidelines');
+      const lblToolbar = document.getElementById('label-toolbar');
+      const lblCards = document.getElementById('label-cards');
+      const lblTable = document.getElementById('label-table');
+
+      if (lang === 'bn') {
+        const bnTab = document.getElementById('lang-bn');
+        const bnBtn = document.getElementById('btn-bn');
+        if (bnTab) bnTab.classList.add('active');
+        if (bnBtn) bnBtn.classList.add('active');
+
+        if (subTitle) subTitle.innerText = 'A quick solution for recent shortcut — পূর্ণাঙ্গ ব্যবহারকারী সহায়িকা ও সাধারণ প্রশ্নোত্তর';
+        if (lblGuidelines) lblGuidelines.innerText = 'শুরুর দিকনির্দেশনা';
+        if (lblToolbar) lblToolbar.innerText = 'কন্ট্রোলবার ও সেটিংস';
+        if (lblCards) lblCards.innerText = 'কার্ড ফিচার ও শর্টকাট';
+        if (lblTable) lblTable.innerText = 'রেফারেন্স টেবিল';
+      } else {
+        const enTab = document.getElementById('lang-en');
+        const enBtn = document.getElementById('btn-en');
+        if (enTab) enTab.classList.add('active');
+        if (enBtn) enBtn.classList.add('active');
+
+        if (subTitle) subTitle.innerText = 'A quick solution for recent shortcut — Complete User Manual & FAQ';
+        if (lblGuidelines) lblGuidelines.innerText = 'Getting Started';
+        if (lblToolbar) lblToolbar.innerText = 'Toolbar & Controls';
+        if (lblCards) lblCards.innerText = 'Cards & Shortcuts';
+        if (lblTable) lblTable.innerText = 'Quick Reference';
+      }
+
+      filterSections(currentFilter);
+    }
+
+    // Theme Switcher (Dark / Light)
+    const themeBtn = document.getElementById('themeBtn');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      html.setAttribute('data-theme', newTheme);
+      try {
+        localStorage.setItem('irop_qa_theme', newTheme);
+      } catch(e) {}
+      updateThemeUI(newTheme);
+    }
+
+    function updateThemeUI(theme) {
+      if (theme === 'light') {
+        if (themeText) themeText.innerText = 'Dark';
+        if (themeIcon) {
+          themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`;
+        }
+      } else {
+        if (themeText) themeText.innerText = 'Light';
+        if (themeIcon) {
+          themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
+        }
+      }
+    }
+
+    // Initialization on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+      let savedTheme = 'dark';
+      let savedLang = 'en'; // Default English as requested
+      let savedFilter = 'guidelines';
+
+      try {
+        savedTheme = localStorage.getItem('irop_qa_theme') || 'dark';
+        savedLang = localStorage.getItem('irop_qa_lang') || 'en';
+        savedFilter = localStorage.getItem('irop_qa_filter') || 'guidelines';
+      } catch(e) {}
+
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeUI(savedTheme);
+
+      switchLanguage(savedLang);
+      filterSections(savedFilter);
+    });
+  </script>
+</body>
+</html>

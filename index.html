@@ -147,7 +147,28 @@
       z-index: 2;
       display: flex;
       justify-content: center;
+      align-items: center;
       margin: 18px 0 28px 0;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-download-btn.btn-exe {
+      background: linear-gradient(135deg, #0078d7 0%, #0284c7 40%, #2563eb 100%);
+      box-shadow: 0 8px 26px rgba(0, 120, 215, 0.45);
+    }
+    .hero-download-btn.btn-exe:hover {
+      background: linear-gradient(135deg, #1084e3 0%, #0369a1 40%, #1d4ed8 100%);
+      box-shadow: 0 12px 34px rgba(0, 120, 215, 0.65);
+    }
+
+    .hero-download-btn.btn-zip {
+      background: linear-gradient(135deg, #0f766e 0%, #0284c7 50%, #1e40af 100%);
+      box-shadow: 0 8px 26px rgba(15, 118, 110, 0.4);
+    }
+    .hero-download-btn.btn-zip:hover {
+      background: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 50%, #2563eb 100%);
+      box-shadow: 0 12px 34px rgba(14, 165, 233, 0.6);
     }
 
     .hero-download-btn {
@@ -732,26 +753,33 @@
       <h1 class="hero-title">iROP Quick Access V.1.1</h1>
       <p id="sub-title" class="hero-subtitle">A quick solution for recent shortcut — Complete User Manual &amp; FAQ</p>
       
-      <!-- Highlighted Hero Download Form (Direct Google Drive Bypass Token) -->
+      <!-- Highlighted Hero Download Buttons (Direct 1-Click EXE and ZIP) -->
       <div class="hero-download-wrapper">
-        <form action="https://drive.usercontent.google.com/download" method="get" target="_blank" style="display: inline-block;">
-          <input type="hidden" name="id" value="119W7uadXkVcabbJsNa4OEFTM8KhUF9Ba">
-          <input type="hidden" name="export" value="download">
-          <input type="hidden" name="confirm" value="t">
-          <input type="hidden" name="authuser" value="0">
+        <!-- Direct EXE Download Button -->
+        <a href="https://www.dropbox.com/scl/fi/5fnlvjpml6qhl79uwxmv5/iROP-Quick-Access-V.1.1.exe?rlkey=f5z4siytw5yvj8odkc74vukjn&st=bjl5rpj0&dl=1" class="download-btn hero-download-btn btn-exe" id="hero-download-exe">
+          <div class="hero-dl-icon-box">
+            <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div class="hero-dl-content">
+            <span class="hero-dl-title" id="title-exe">Download EXE</span>
+            <span class="hero-dl-sub" id="sub-exe">iROP Quick Access V.1.1</span>
+          </div>
+        </a>
 
-          <button type="submit" class="download-btn hero-download-btn" id="hero-download-btn">
-            <div class="hero-dl-icon-box">
-              <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-              </svg>
-            </div>
-            <div class="hero-dl-content">
-              <span class="hero-dl-title" id="hero-dl-title">Download iROP Quick Access V1.1 (.zip)</span>
-              <span class="hero-dl-sub" id="hero-dl-sub">Direct One-Click Download • Virus Scan Bypass</span>
-            </div>
-          </button>
-        </form>
+        <!-- Direct ZIP Download Button -->
+        <a href="https://www.dropbox.com/scl/fi/aittafemcbqwls8vki8r3/iROP-Quick-Access-V.1.1.zip?rlkey=xa8317g24l5jn1f3eweuikubm&st=cwgvei8d&dl=1" class="download-btn hero-download-btn btn-zip" id="hero-download-zip">
+          <div class="hero-dl-icon-box">
+            <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            </svg>
+          </div>
+          <div class="hero-dl-content">
+            <span class="hero-dl-title" id="title-zip">Download ZIP</span>
+            <span class="hero-dl-sub" id="sub-zip">iROP Quick Access V.1.1</span>
+          </div>
+        </a>
       </div>
 
       <!-- 4 Menu Tabs -->
@@ -1838,8 +1866,10 @@
       const lblToolbar = document.getElementById("label-toolbar");
       const lblCards = document.getElementById("label-cards");
       const lblTable = document.getElementById("label-table");
-      const heroDlTitle = document.getElementById("hero-dl-title");
-      const heroDlSub = document.getElementById("hero-dl-sub");
+      const titleExe = document.getElementById("title-exe");
+      const subExe = document.getElementById("sub-exe");
+      const titleZip = document.getElementById("title-zip");
+      const subZip = document.getElementById("sub-zip");
 
       if (lang === "bn") {
         const bnTab = document.getElementById("lang-bn");
@@ -1847,13 +1877,15 @@
         if (bnTab) bnTab.classList.add("active");
         if (bnBtn) bnBtn.classList.add("active");
 
-        if (subTitle) subTitle.innerText = "A quick solution for recent shortcut — পূর্ণাঙ্গ ব্যবহারকারী সহায়িকা ও সাধারণ প্রশ্নোত্তর";
+        if (subTitle) subTitle.innerText = "A quick solution for recent shortcut — পূর্ণাঙ্গ ব্যবহারকারী সহায়িকা ও সাধারণ প্রশ্নোত্তর";
         if (lblGuidelines) lblGuidelines.innerText = "শুরুর দিকনির্দেশনা";
         if (lblToolbar) lblToolbar.innerText = "কন্ট্রোলবার ও সেটিংস";
         if (lblCards) lblCards.innerText = "কার্ড ফিচার ও শর্টকাট";
         if (lblTable) lblTable.innerText = "রেফারেন্স টেবিল";
-        if (heroDlTitle) heroDlTitle.innerText = "iROP Quick Access V1.1 ডাউনলোড (.zip)";
-        if (heroDlSub) heroDlSub.innerText = "সরাসরি ওয়ান-ক্লিক ডাউনলোড • অটো বাইপাস টোকেন";
+        if (titleExe) titleExe.innerText = "Download EXE";
+        if (subExe) subExe.innerText = "iROP Quick Access V.1.1";
+        if (titleZip) titleZip.innerText = "Download ZIP";
+        if (subZip) subZip.innerText = "iROP Quick Access V.1.1";
       } else {
         const enTab = document.getElementById("lang-en");
         const enBtn = document.getElementById("btn-en");
@@ -1865,8 +1897,10 @@
         if (lblToolbar) lblToolbar.innerText = "Toolbar & Controls";
         if (lblCards) lblCards.innerText = "Cards & Shortcuts";
         if (lblTable) lblTable.innerText = "Quick Reference";
-        if (heroDlTitle) heroDlTitle.innerText = "Download iROP Quick Access V1.1 (.zip)";
-        if (heroDlSub) heroDlSub.innerText = "Direct One-Click Download • Virus Scan Bypass";
+        if (titleExe) titleExe.innerText = "Download EXE";
+        if (subExe) subExe.innerText = "iROP Quick Access V.1.1";
+        if (titleZip) titleZip.innerText = "Download ZIP";
+        if (subZip) subZip.innerText = "iROP Quick Access V.1.1";
       }
 
       filterSections(currentFilter);

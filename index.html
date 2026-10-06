@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
   <script>
     (function() {
       try {
-        var savedTheme = localStorage.getItem("irop_qa_theme") || "dark";
+        var savedTheme = localStorage.getItem("irop_qa_theme") || "light";
         document.documentElement.setAttribute("data-theme", savedTheme);
       } catch (e) {}
     })();
@@ -764,7 +764,7 @@
           </div>
           <div class="hero-dl-content">
             <span class="hero-dl-title" id="title-exe">Download EXE</span>
-            <span class="hero-dl-sub" id="sub-exe">iROP Quick Access V.1.1</span>
+            <span class="hero-dl-sub" id="sub-exe">iROP Quick Access V.1.1 (37mb)</span>
           </div>
         </a>
 
@@ -777,7 +777,7 @@
           </div>
           <div class="hero-dl-content">
             <span class="hero-dl-title" id="title-zip">Download ZIP</span>
-            <span class="hero-dl-sub" id="sub-zip">iROP Quick Access V.1.1</span>
+            <span class="hero-dl-sub" id="sub-zip">iROP Quick Access V.1.1 (37mb)</span>
           </div>
         </a>
       </div>
@@ -1142,6 +1142,63 @@
             </div>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q17: How does Individual Card Coloring (🎨 Card Color) work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Custom Card Color Palette:</strong> Right-click on any card and navigate to <span class="code-inline">🎨 Card Color</span> (located right below <em>Copy Path</em>):
+              <ul>
+                <li><strong>7 Elegant Color Presets:</strong> Choose from <em>🔹 Blue</em>, <em>🌿 Green</em>, <em>💜 Purple</em>, <em>☕ Orange / Amber</em>, <em>🌹 Red / Rose</em>, <em>🌊 Teal</em>, or <em>🌑 Slate Navy</em>, plus <em>↺ Default Color</em> to reset.</li>
+                <li><strong>Dual-Theme Harmony:</strong> Each color features tailored dark-mode glows and soft light-mode pastel tints with high-contrast borders for flawless readability.</li>
+                <li><strong>Persistent Memory:</strong> Card colors are automatically saved in your settings (<span class="code-inline">.irop_quick_access.json</span>) and included in exported/saved presets so they remain styled every time you launch the app.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q18: How do Windows-Style Multi-Select and Batch Delete work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Marquee Drag &amp; Ctrl+Click Selection:</strong>
+              <ul>
+                <li><strong>Mouse Drag (Rubber Band):</strong> Click and drag across any empty space in the grid to draw a translucent Windows-style blue selection box and select multiple cards at once.</li>
+                <li><strong>Ctrl + Click:</strong> Hold <span class="code-inline">Ctrl</span> and click individual cards to toggle multi-selection.</li>
+                <li><strong>Batch Delete (Y/N Confirmation):</strong> Press <span class="code-inline">Delete</span> or <span class="code-inline">Backspace</span> on your keyboard (or right-click &rarr; <em>🗑️ Remove X Selected Shortcuts...</em>) to delete all selected cards simultaneously after confirming the Yes/No dialog.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q19: How does the Resizable Recent Files panel and Auto-Responsive Grid Reflow work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Flexible Workspace Splitter &amp; Live Reflow:</strong>
+              <ul>
+                <li><strong>Drag-to-Resize Handle:</strong> A vertical splitter handle separates the main shortcut grid and the right-side <em>Recent Files</em> panel. Drag left/right to resize the panel freely between 200px and 500px (defaults to 280px).</li>
+                <li><strong>Auto-Responsive Grid Reflow:</strong> Expanding the right panel automatically pushes shortcut cards down to the next row in real-time, preventing cards from ever being clipped or hidden. Narrowing the panel immediately brings cards back up to fill the empty space.</li>
+                <li><strong>Prominent "Show in Folder" (📂) Icon:</strong> For files, videos, and applications, a larger, high-contrast <span class="code-inline">📂</span> button is positioned at the bottom-right next to the path for 1-click folder browsing in Windows Explorer.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- TAB 4: QUICK REFERENCE TABLE -->
@@ -1219,6 +1276,36 @@
                   <td class="badge-feature">✕ Button on Card</td>
                   <td>Active</td>
                   <td>Shows safety confirmation dialog before removing a card.</td>
+                </tr>
+                <tr>
+                  <td>Individual Card Color</td>
+                  <td class="badge-feature">Right-Click &rarr; 🎨 Card Color</td>
+                  <td>Default</td>
+                  <td>Choose from 7 tailored color tints with persistent profile memory.</td>
+                </tr>
+                <tr>
+                  <td>Multi-Select &amp; Batch Delete</td>
+                  <td class="badge-feature">Marquee Drag / Ctrl+Click / Del</td>
+                  <td>Active</td>
+                  <td>Select multiple cards via rubberband drag or Ctrl+Click; batch delete with Y/N dialog.</td>
+                </tr>
+                <tr>
+                  <td>Resizable Recent Panel</td>
+                  <td class="badge-feature">Splitter Handle (200–500px)</td>
+                  <td class="badge-key">280px</td>
+                  <td>Flexible left/right splitter handle with automatic session state caching.</td>
+                </tr>
+                <tr>
+                  <td>Auto-Responsive Grid Reflow</td>
+                  <td class="badge-feature">Live Viewport Resize</td>
+                  <td>Dynamic</td>
+                  <td>Cards automatically wrap and drop into rows as sidebar is resized.</td>
+                </tr>
+                <tr>
+                  <td>Show in Folder Button</td>
+                  <td class="badge-feature">📂 Button (Bottom-Right of Card)</td>
+                  <td>Active</td>
+                  <td>Direct 1-click button to open and highlight file in Windows File Explorer.</td>
                 </tr>
                 <tr>
                   <td>Live Open Folders Dock (200x40)</td>
@@ -1629,6 +1716,63 @@
             </div>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১৭: কার্ডে আলাদা আলাদা কাস্টম কালার (🎨 Card Color) কীভাবে সেট করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>ইন্ডিভিজুয়াল কার্ড কালার প্যালেট:</strong> যেকোনো কার্ডে রাইট-ক্লিক করে <em>Copy Path</em> এর নিচে থাকা <span class="code-inline">🎨 Card Color</span> সাব-মেনুতে যান:
+              <ul>
+                <li><strong>৭টি মার্জিত কালার প্রিসেট:</strong> <em>🔹 Blue</em>, <em>🌿 Green</em>, <em>💜 Purple</em>, <em>☕ Orange / Amber</em>, <em>🌹 Red / Rose</em>, <em>🌊 Teal</em>, এবং <em>🌑 Slate Navy</em> থেকে পছন্দের কালার বেছে নিতে পারেন। এছাড়া <em>↺ Default Color</em> দিয়ে যেকোনো সময় ডিফল্ট থিম কালারে ফিরিয়ে নেওয়া যায়।</li>
+                <li><strong>ডার্ক ও লাইট উভয় মোডে সামঞ্জস্য:</strong> প্রতিটি কালার ডার্ক এবং লাইট মোডের সাথে স্বয়ংক্রিয়ভাবে মানানসই সফট টিন্ট ও বর্ডারে প্রদর্শিত হয়।</li>
+                <li><strong>স্থায়ী মেমরি:</strong> নির্বাচিত কালার স্বয়ংক্রিয়ভাবে ক্যাশে ও সেভ প্রিসেট ফাইলে সংরক্ষিত থাকে, ফলে অ্যাপ রিস্টার্ট বা প্রিসেট লোড করলেও কার্ডের কালার অক্ষত থাকে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১৮: উইন্ডোজ স্টাইলে মাউস ড্র্যাগ করে মাল্টিপল সিলেক্ট ও একসাথে ডিলিট কীভাবে করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>রাবারব্যান্ড ড্র্যাগ ও Ctrl+Click মাল্টি-সিলেকশন:</strong>
+              <ul>
+                <li><strong>মাউস ড্র্যাগ সিলেকশন:</strong> গ্রিডের খালি জায়গায় মাউস চেপে ধরে ড্র্যাগ করলে উইন্ডোজের মতো নীল ট্রান্সলুসেন্ট সিলেকশন বক্স তৈরি হয়ে একাধিক কার্ড একসাথে সিলেক্ট হবে।</li>
+                <li><strong>Ctrl + Click:</strong> কিবোর্ডের <span class="code-inline">Ctrl</span> চেপে ধরে একাধিক কার্ডে ক্লিক করে নির্দিষ্ট কার্ডগুলো সিলেক্ট বা আনসিলেক্ট করা যায়।</li>
+                <li><strong>একসাথে ডিলিট (Yes/No কনফার্মেশন):</strong> কিবোর্ডের <span class="code-inline">Delete</span> বা <span class="code-inline">Backspace</span> চাপলে (অথবা রাইট-ক্লিক &rarr; <em>🗑️ Remove X Selected Shortcuts...</em> দিলে) একটি কনফার্মেশন ডায়লগ আসবে। <strong>Yes</strong> দিলে সবগুলো সিলেক্টেড কার্ড একসাথে রিমুভ হবে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১৯: ডান পাশের রিসেন্ট ফাইল প্যানেল রিসাইজ এবং অটো-রেসপনসিভ গ্রিড রিফ্লো কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>ফ্লেক্সিবল স্প্লিটার ও লাইভ রেসপনসিভ রিফ্লো:</strong>
+              <ul>
+                <li><strong>স্প্লিটার হ্যান্ডেল:</strong> শর্টকাট গ্রিড এবং ডান পাশের <em>Recent Files</em> প্যানেলের মাঝে একটি রিসাইজ হ্যান্ডেল রয়েছে। মাউস দিয়ে ডানে-বামে টেনে প্যানেলটি ২০০px থেকে ৫০০px পর্যন্ত বড় বা ছোট করা যায়।</li>
+                <li><strong>অটো-রেসপনসিভ ড্রপ ডাউন:</strong> ডান পাশের প্যানেল বামে বাড়ালে কার্ডগুলো ঢেকে না গিয়ে তাৎক্ষণিক স্বয়ংক্রিয়ভাবে পরের সারিতে নেমে জায়গা করে নেয়। প্যানেল ছোট করলে কার্ডগুলো আবার উপরে উঠে ফাঁকা স্থান পূরণ করে।</li>
+                <li><strong>বড় "Show in Folder" (📂) আইকন:</strong> ফাইল ও অ্যাপ কার্ডের নিচে-ডান কোণায় পাথের পাশে একটি স্পষ্ট <span class="code-inline">📂</span> বাটন রয়েছে, যা দিয়ে ১-ক্লিকেই উইন্ডোজ এক্সপ্লোরারে উক্ত ফাইলের ফোল্ডার লোকেশন ব্রাউজ করা যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- TAB 4: রেফারেন্স টেবিল -->
@@ -1706,6 +1850,36 @@
                   <td class="badge-feature">কার্ডের ✕ বাটন</td>
                   <td>সক্রিয়</td>
                   <td>ভুলবশত ডিলিট এড়াতে কনফার্মেশন প্রম্পট প্রদর্শন করে।</td>
+                </tr>
+                <tr>
+                  <td>কার্ডের কাস্টম কালার</td>
+                  <td class="badge-feature">রাইট-ক্লিক &rarr; 🎨 Card Color</td>
+                  <td>ডিফল্ট</td>
+                  <td>৭টি মার্জিত কালার প্রিসেট ও স্থায়ী মেমরি ক্যাশিং।</td>
+                </tr>
+                <tr>
+                  <td>মাল্টি-সিলেক্ট ও ব্যাচ ডিলিট</td>
+                  <td class="badge-feature">মাউস ড্র্যাগ / Ctrl+Click / Del</td>
+                  <td>সক্রিয়</td>
+                  <td>রাবারব্যান্ড ড্র্যাগ বা Ctrl+Click এ বহু কার্ড নির্বাচন ও Yes/No কনফার্মেশনে ডিলিট।</td>
+                </tr>
+                <tr>
+                  <td>রিসেন্ট প্যানেল রিসাইজ</td>
+                  <td class="badge-feature">স্প্লিটার হ্যান্ডেল (২০০–৫০০px)</td>
+                  <td class="badge-key">২৮০px</td>
+                  <td>মাউস দিয়ে ডানে-বামে টেনে প্যানেল রিসাইজ করার সুবিধা।</td>
+                </tr>
+                <tr>
+                  <td>অটো-রেসপনসিভ গ্রিড রিফ্লো</td>
+                  <td class="badge-feature">লাইভ ভিউপোর্ট রিফ্লো</td>
+                  <td>স্বয়ংক্রিয়</td>
+                  <td>প্যানেল বড় করলে কার্ডগুলো স্বয়ংক্রিয়ভাবে পরের সারিতে নেমে জায়গা করে নেয়।</td>
+                </tr>
+                <tr>
+                  <td>শো ইন ফোল্ডার বাটন</td>
+                  <td class="badge-feature">📂 বাটন (কার্ডের নিচে ডানে)</td>
+                  <td>সক্রিয়</td>
+                  <td>১-ক্লিকে ফোল্ডার লোকেশন ব্রাউজ ও ফাইল সিলেক্ট করার বাটন।</td>
                 </tr>
                 <tr>
                   <td>লাইভ ওপেন ফোল্ডার্স ডক (২০০x৪০)</td>
@@ -1883,9 +2057,9 @@
         if (lblCards) lblCards.innerText = "কার্ড ফিচার ও শর্টকাট";
         if (lblTable) lblTable.innerText = "রেফারেন্স টেবিল";
         if (titleExe) titleExe.innerText = "Download EXE";
-        if (subExe) subExe.innerText = "iROP Quick Access V.1.1";
+        if (subExe) subExe.innerText = "iROP Quick Access V.1.1 (37mb)";
         if (titleZip) titleZip.innerText = "Download ZIP";
-        if (subZip) subZip.innerText = "iROP Quick Access V.1.1";
+        if (subZip) subZip.innerText = "iROP Quick Access V.1.1 (37mb)";
       } else {
         const enTab = document.getElementById("lang-en");
         const enBtn = document.getElementById("btn-en");
@@ -1898,9 +2072,9 @@
         if (lblCards) lblCards.innerText = "Cards & Shortcuts";
         if (lblTable) lblTable.innerText = "Quick Reference";
         if (titleExe) titleExe.innerText = "Download EXE";
-        if (subExe) subExe.innerText = "iROP Quick Access V.1.1";
+        if (subExe) subExe.innerText = "iROP Quick Access V.1.1 (37mb)";
         if (titleZip) titleZip.innerText = "Download ZIP";
-        if (subZip) subZip.innerText = "iROP Quick Access V.1.1";
+        if (subZip) subZip.innerText = "iROP Quick Access V.1.1 (37mb)";
       }
 
       filterSections(currentFilter);
@@ -1937,14 +2111,14 @@
       }
     }
 
-    // Initialization on Page Load
+    // Initialization on Page Load (Default: Light Theme & English)
     document.addEventListener("DOMContentLoaded", () => {
-      let savedTheme = "dark";
+      let savedTheme = "light";
       let savedLang = "en";
       let savedFilter = "guidelines";
 
       try {
-        savedTheme = localStorage.getItem("irop_qa_theme") || "dark";
+        savedTheme = localStorage.getItem("irop_qa_theme") || "light";
         savedLang = localStorage.getItem("irop_qa_lang") || "en";
         savedFilter = localStorage.getItem("irop_qa_filter") || "guidelines";
       } catch(e) {}

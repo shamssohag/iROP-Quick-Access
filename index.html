@@ -1023,7 +1023,7 @@
             <div class="faq-answer-inner">
               Under the <span class="code-inline">💾 Save</span> menu:
               <ul>
-                <li><strong>Save Current as Named Preset...:</strong> Prompts you for a friendly name (e.g., <em>Work</em>, <em>Video Editing</em>, <em>Daily</em>) and creates a designated backup file in your user profile.</li>
+                <li><strong>Save Current as Named Preset...:</strong> Prompts you for a friendly name (e.g., <em>Work</em>, <em>Video Editing</em>, <em>Daily</em>) and saves all groups, card colors, and shortcuts. If a preset with that name already exists, an explicit <strong>Overwrite Warning Prompt</strong> asks for confirmation to prevent accidental loss!</li>
                 <li><strong>Automatic Recent List:</strong> The last 10 exported, imported, or saved preset files are automatically tracked and displayed as quick-load items under <span class="code-inline">── Recent Presets (Last 10) ──</span>.</li>
                 <li><strong>Instant Switching:</strong> Clicking any preset in the list immediately loads all shortcuts from that preset and updates your view seamlessly.</li>
               </ul>
@@ -1222,6 +1222,51 @@
             </div>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q20: How does the Left Groups Sidebar (120px) work like Layers?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Layer-Like Group Organization:</strong>
+              <ul>
+                <li><strong>120px Dedicated Sidebar:</strong> Positioned along the far left edge of the cards grid, displaying all your workspace groups with active badge counters.</li>
+                <li><strong>Layer-Style Card Isolation:</strong> Clicking any group shows only that group's cards, smoothly hiding shortcuts from all other groups.</li>
+                <li><strong>Independent Multi-Group Folder Presence:</strong> The exact same project folder or file can exist in multiple groups simultaneously with independent colors, hotkeys, and pin statuses!</li>
+                <li><strong>Dynamic "+ Add Group" Placement:</strong> The <span class="code-inline">➕ Add Group</span> button sits directly underneath the last group item and automatically moves down as new groups are added.</li>
+                <li><strong>🎨 Group Tab Coloring:</strong> Right-click any group item &rarr; <span class="code-inline">🎨 Group Color</span> to personalize tabs with 8 elegant color swatches (Slate Navy, Ocean Blue, Forest Mint, Soft Lavender, Warm Sand, Amber, etc.). Group colors persist permanently across restarts and named presets!</li>
+                <li><strong>Top Default Group:</strong> The top group (<em>Default</em>) is permanent and cannot be deleted.</li>
+                <li><strong>Safe Group Deletion:</strong> Deleting a custom group asks for confirmation and automatically moves all its shortcuts to the Default group so nothing is ever lost.</li>
+                <li><strong>Effortless Card Transfer:</strong> Right-click any card &rarr; <span class="code-inline">📁 Move to Group</span>, or simply drag and drop a card from the grid onto any group in the sidebar!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q21: How does the Dual-Tab Panel (Recent Files &amp; Recent Download) work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Dual-Tab Right Side Panel (410px Width):</strong>
+              <ul>
+                <li><strong>Tab 1 &mdash; 🕒 Recent Files:</strong> Live auto-detects your most recently modified creative documents (Photoshop PSD, Premiere projects, Word, Excel, media) from Windows Recent.</li>
+                <li><strong>Tab 2 &mdash; 📥 Recent Download:</strong> Live auto-detects all incoming files and subfolders in your default Windows Downloads folder (or custom directory) sorted by newest first.</li>
+                <li><strong>Dedicated "📁 Change Location" Button:</strong> In the Recent Download tab, a visible <span class="code-inline">📁 Change Location</span> button lets you switch the watched directory to any custom folder (e.g. project rendering directory). Any file or folder created there appears live!</li>
+                <li><strong>Optimized 410px Splitter Ratio:</strong> The right panel defaults to a comfortable 410px width so both tabs, full filenames, and action buttons fit with ample breathing room.</li>
+                <li><strong>1-Click Actions on Every Row:</strong> Click any row to launch, click <span class="code-inline">📂</span> to reveal in File Explorer, or click <span class="code-inline">＋</span> to instantly pin the file/folder to your currently active group in the main shortcut grid!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
 
@@ -1252,6 +1297,18 @@
                   <td class="badge-feature">Right-Click &rarr; 🖥️ Create Desktop Shortcut</td>
                   <td>—</td>
                   <td>Creates a native Windows .url Internet Shortcut directly on your Desktop.</td>
+                </tr>
+                <tr>
+                  <td>Groups Sidebar (120px)</td>
+                  <td class="badge-feature">📁 Groups &rarr; ＋ Add Group</td>
+                  <td>Default Group</td>
+                  <td>Layer-like group area on far left; switch groups, filter cards, or drag cards onto groups.</td>
+                </tr>
+                <tr>
+                  <td>Recent Downloads &amp; Watch Folder</td>
+                  <td class="badge-feature">Right Panel &rarr; 📥 Recent Download &rarr; 📁 Folder</td>
+                  <td>Downloads Folder</td>
+                  <td>Tab 2 in right panel (410px); live auto-detects new files &amp; subfolders in Downloads or custom folder via 📁 Change Location.</td>
                 </tr>
                 <tr>
                   <td>Add Folder or Drive</td>
@@ -1634,7 +1691,7 @@
             <div class="faq-answer-inner">
               <span class="code-inline">💾 Save</span> মেনুর নিচে:
               <ul>
-                <li><strong>Save Current as Named Preset...:</strong> আপনার বর্তমান শর্টকাট সেটটিকে একটি নির্দিষ্ট নামে (যেমন: <em>Work</em>, <em>Video Editing</em>, <em>Daily</em>) আলাদা প্রিসেট হিসেবে সেভ করতে পারবেন।</li>
+                <li><strong>Save Current as Named Preset...:</strong> বর্তমান শর্টকাট সেট, গ্রুপ তালিকা ও গ্রুপের কালারসমূহ একটি নির্দিষ্ট নামে আলাদা প্রিসেট হিসেবে সেভ করতে পারবেন। পূর্বের নামের সাথে মিল থাকলে ভুলবশত মোছা রোধে একটি স্পষ্ট <strong>ওভাররাইট সতর্কতা ডায়লগ (Overwrite Warning)</strong> কনফার্মেশন চাইবে।</li>
                 <li><strong>সর্বশেষ ১০টি প্রিসেট তালিকা:</strong> আপনার তৈরি করা বা ইমপোর্ট করা সর্বশেষ ১০টি প্রিসেট স্বয়ংক্রিয়ভাবে <span class="code-inline">── Recent Presets (Last 10) ──</span> সেকশনে ক্রমানুসারে সেভ থাকে।</li>
                 <li><strong>১-ক্লিকে লোড:</strong> তালিকায় থাকা যেকোনো প্রিসেটে ক্লিক করলেই সাথে সাথে সেই সম্পূর্ণ শর্টকাটগুলো অ্যাপে লোড হয়ে যায়।</li>
               </ul>
@@ -1833,6 +1890,51 @@
             </div>
           </div>
         </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ২০: বাম পাশের ১২০px গ্রুপ এরিয়া (Groups Sidebar) কীভাবে লেয়ারের মতো কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>লেয়ারের মতো স্মার্ট গ্রুপ সিস্টেম:</strong>
+              <ul>
+                <li><strong>১২০px ডেডিকেটেড সাইডবার:</strong> মূল কার্ড গ্রিডের একদম বাম পাশে ১২০px প্রস্থের সাইডবার রয়েছে যেখানে সবকটি গ্রুপের তালিকা ও লাইভ কাউন্টার দেখা যায়।</li>
+                <li><strong>লেয়ার স্টাইল আইসোলেশন:</strong> যে গ্রুপে ক্লিক করবেন, শুধুমাত্র সেই গ্রুপের কার্ডগুলোই গ্রিডে প্রদর্শিত হবে এবং অন্যান্য গ্রুপের কার্ডগুলো নিরাপদে অদৃশ্য থাকবে।</li>
+                <li><strong>একাধিক গ্রুপে একই ফোল্ডার রাখার সুবিধা:</strong> একই নামের ফোল্ডার বা প্রজেক্ট (যেমন <em>360 77</em>) সম্পূর্ণ স্বাধীনভাবে একাধিক গ্রুপে (Default, Work, Video ইত্যাদিতে) আলাদা পিন ও কালারসহ রাখতে পারবেন!</li>
+                <li><strong>ডাইনামিক "+ Add Group" বাটন:</strong> নতুন গ্রুপ তৈরি করার <span class="code-inline">➕ Add Group</span> বাটনটি সর্বশেষ গ্রুপের ঠিক নিচে থাকে এবং নতুন গ্রুপ যুক্ত হওয়ার সাথে সাথে স্বয়ংক্রিয়ভাবে তার নিচে নেমে যায়।</li>
+                <li><strong>🎨 গ্রুপ ট্যাব কালারিং:</strong> যেকোনো গ্রুপে রাইট-ক্লিক করে <span class="code-inline">🎨 Group Color</span> মেনু থেকে ৮টি আকর্ষনীয় কালার প্যালেট (Slate Navy, Ocean Blue, Forest Mint, Soft Lavender, Warm Sand ইত্যাদি) দিয়ে গ্রুপ ট্যাবে নিজস্ব রং দিতে পারবেন। এই কালার অ্যাপ বন্ধ করে পুনরায় চালু করলেও বা প্রিসেটে সবসময় সংরক্ষিত থাকবে।</li>
+                <li><strong>টপ গ্রুপ ডিফল্ট:</strong> তালিকার প্রথম <em>Default</em> গ্রুপটি স্থায়ী এবং সুরক্ষিত থাকে।</li>
+                <li><strong>নিরাপদ গ্রুপ ডিলিট:</strong> কোনো কাস্টম গ্রুপ ডিলিট করলে ভেতরের কার্ডগুলো নষ্ট না হয়ে স্বয়ংক্রিয়ভাবে সুরক্ষিত <em>Default</em> গ্রুপে স্থানান্তরিত হয়।</li>
+                <li><strong>সহজ ড্র্যাগ-মুভ:</strong> যেকোনো কার্ডে রাইট-ক্লিক করে <span class="code-inline">📁 Move to Group</span> চাপুন, অথবা গ্রিড থেকে মাউস দিয়ে কার্ড টেনে সাইডবারের যেকোনো গ্রুপের ওপর ড্রপ করলেই কার্ডটি সেই গ্রুপে স্থানান্তরিত হবে!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ২১: ডান পাশের ডুয়াল ট্যাব (Recent Files ও Recent Download) কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>ডান পাশের ডুয়াল-ট্যাব প্যানেল (৪১০px সাইজ):</strong>
+              <ul>
+                <li><strong>ট্যাব ১ &mdash; 🕒 Recent Files:</strong> ফটোশপ, প্রিমিয়ার প্রো, ওয়ার্ড বা এক্সেলের মতো সফটওয়্যারে কাজ করা সর্বশেষ ফাইলগুলো উইন্ডোজ রিসেন্ট থেকে স্বয়ংক্রিয়ভাবে ডিটেক্ট করে দেখায়।</li>
+                <li><strong>ট্যাব ২ &mdash; 📥 Recent Download:</strong> উইন্ডোজের ডিফল্ট ডাউনলোড ফোল্ডারে আসা সর্বশেষ ফাইল ও সাব-ফোল্ডারগুলো স্বয়ংক্রিয়ভাবে নতুন থেকে পুরাতন ক্রমানুসারে লাইভ প্রদর্শিত হয়।</li>
+                <li><strong>নিবেদিত "📁 Change Location" বাটন:</strong> রিসেন্ট ডাউনলোড ট্যাবে থাকা অবস্থায় একটি স্পষ্ট <span class="code-inline">📁 Change Location</span> বাটন দেখতে পাবেন। এতে ক্লিক করে আপনি যেকোনো প্রজেক্ট বা আউটপুট ফোল্ডার নির্বাচন করতে পারবেন। উক্ত ফোল্ডারে আসা নতুন ফাইল বা ফোল্ডারগুলো সাথে সাথে লাইভ তালিকায় চলে আসবে!</li>
+                <li><strong>আরামদায়ক ৪১০px ডিফল্ট প্রস্থ:</strong> প্যানেলটির প্রস্থ ৪১০px নির্ধারিত করায় দুটি ট্যাব, ফাইলের পূর্ণ নাম এবং ডান পাশের অ্যাকশন বাটনসমূহ পর্যাপ্ত স্পেস নিয়ে পরিষ্কারভাবে প্রদর্শিত হয়।</li>
+                <li><strong>সারির অ্যাকশন বাটনসমূহ:</strong> তালিকায় থাকা যেকোনো ফাইলে ক্লিক করে ওপেন করা, <span class="code-inline">📂</span> বাটনে এক্সপ্লোরারে ফাইলটি চিহ্নিত করা এবং <span class="code-inline">＋</span> বাটনে ১-ক্লিকেই মূল শর্টকাট গ্রিডের <strong>সক্রিয় গ্রুপে</strong> পিন করার সুবিধা রয়েছে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
 
@@ -1863,6 +1965,18 @@
                   <td class="badge-feature">রাইট-ক্লিক &rarr; 🖥️ Create Desktop Shortcut</td>
                   <td>—</td>
                   <td>উইন্ডোজ ডেস্কটপে সরাসরি আসল .url ইন্টারনেট শর্টকাট ফাইল তৈরি করে।</td>
+                </tr>
+                <tr>
+                  <td>গ্রুপ সাইডবার (১২০px)</td>
+                  <td class="badge-feature">📁 Groups &rarr; ＋ Add Group</td>
+                  <td>Default গ্রুপ</td>
+                  <td>বাম পাশের ১২০px লেয়ার এরিয়া; গ্রুপ নির্বাচন, কার্ড ফিল্টারিং ও গ্রুপে ড্র্যাগ-মুভ সুবিধা।</td>
+                </tr>
+                <tr>
+                  <td>রিসেন্ট ডাউনলোড ও ওয়াচ ফোল্ডার</td>
+                  <td class="badge-feature">ডান প্যানেল &rarr; 📥 Recent Download &rarr; 📁 ফোল্ডার</td>
+                  <td>ডাউনলোড ফোল্ডার</td>
+                  <td>ডান পাশের ট্যাব ২ (৪১০px); ডাউনলোড বা 📁 Change Location দিয়ে নির্ধারিত ফোল্ডারের ফাইল ও ফোল্ডার লাইভ প্রদর্শন।</td>
                 </tr>
                 <tr>
                   <td>ফোল্ডার বা ড্রাইভ যুক্ত করা</td>

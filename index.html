@@ -2530,26 +2530,49 @@
       initDownloadCounter();
     });
 
-    // Official GitHub Releases API Live Downloads Counter (100% Synchronized Across All Browsers & Devices)
+    // Official GitHub Releases API Live Downloads Counter with Instant Local Persistence
     const GITHUB_REPO = "shamssohag/iROP-Quick-Access";
     let liveDownloadTotal = 0;
 
+    function getLocalCachedCount() {
+      try {
+        const val = localStorage.getItem("irop_gh_download_count");
+        if (val !== null) {
+          const n = parseInt(val, 10);
+          if (!isNaN(n) && n > 0) return n;
+        }
+      } catch(e) {}
+      return 0;
+    }
+
     function renderTotalDownloadCount(count) {
-      liveDownloadTotal = Math.max(0, count);
+      const stored = getLocalCachedCount();
+      liveDownloadTotal = Math.max(count, stored);
+
       const totalCountEl = document.getElementById("total-download-count");
       if (totalCountEl) {
         totalCountEl.innerText = liveDownloadTotal.toLocaleString();
       }
+
+      try {
+        localStorage.setItem("irop_gh_download_count", liveDownloadTotal);
+      } catch(e) {}
     }
 
-    // Instant click feedback
+    // Instant click feedback + immediate persistence so refresh NEVER resets to 0!
     function onDownloadClicked() {
-      liveDownloadTotal += 1;
-      renderTotalDownloadCount(liveDownloadTotal);
+      const current = Math.max(liveDownloadTotal, getLocalCachedCount());
+      renderTotalDownloadCount(current + 1);
     }
 
     async function initDownloadCounter() {
-      // 1. Attach instant click listeners to both download buttons
+      // 1. Immediately render cached count on page load so refresh NEVER shows 0!
+      const initial = getLocalCachedCount();
+      if (initial > 0) {
+        renderTotalDownloadCount(initial);
+      }
+
+      // 2. Attach instant click listeners to both download buttons
       const btnExe = document.getElementById("hero-download-exe");
       if (btnExe && !btnExe._counterBound) {
         btnExe._counterBound = true;
@@ -2562,7 +2585,7 @@
         btnZip.addEventListener("click", onDownloadClicked);
       }
 
-      // 2. Fetch official global download counts directly from GitHub Releases API
+      // 3. Fetch official global download counts directly from GitHub Releases API
       try {
         const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/releases`, {
           headers: { "Accept": "application/vnd.github.v3+json" }
@@ -2582,7 +2605,10 @@
               }
             });
           }
-          renderTotalDownloadCount(total);
+          // Only update if GitHub returns a non-zero count, never downgrade to 0
+          if (total > 0) {
+            renderTotalDownloadCount(total);
+          }
         }
       } catch(err) {
         console.warn("Could not fetch GitHub download count:", err);

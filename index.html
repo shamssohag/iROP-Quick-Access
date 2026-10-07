@@ -148,9 +148,79 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 18px 0 28px 0;
+      margin: 18px 0 16px 0;
       gap: 16px;
       flex-wrap: wrap;
+    }
+
+    /* Live GitHub Combined Downloads Counter Badge */
+    .download-counter-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 0 auto 22px auto;
+      padding: 3.5px 12px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+
+    .download-counter-badge:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent-blue);
+      box-shadow: 0 5px 16px rgba(0, 120, 215, 0.22);
+    }
+
+    .dl-counter-pulse {
+      width: 6px;
+      height: 6px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: counterPulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes counterPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+
+    .dl-counter-svg {
+      width: 12.5px;
+      height: 12.5px;
+      stroke: var(--accent-blue);
+      flex-shrink: 0;
+    }
+
+    .dl-counter-text strong {
+      color: var(--accent-blue);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      margin-left: 2px;
+      font-size: 11px;
+    }
+
+    .dl-counter-details {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-left: 2px;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .hero-download-btn.btn-exe {
@@ -780,6 +850,22 @@
             <span class="hero-dl-sub" id="sub-zip">iROP Quick Access V.1.1 (37mb)</span>
           </div>
         </a>
+      </div>
+
+      <!-- Live GitHub Combined Downloads Counter Badge (EXE + ZIP) -->
+      <div style="text-align: center;">
+        <div class="download-counter-badge" id="dl-counter-badge">
+          <span class="dl-counter-pulse"></span>
+          <svg class="dl-counter-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          <span id="dl-counter-text" class="dl-counter-text">
+            <span id="label-dl-count">Total Downloads:</span> <strong id="total-download-count">Loading...</strong>
+          </span>
+          <span class="dl-counter-details" id="dl-counter-details" style="display: none;">
+            (EXE: <span id="count-exe">0</span> + ZIP: <span id="count-zip">0</span>)
+          </span>
+        </div>
       </div>
 
       <!-- 4 Menu Tabs -->
@@ -2363,6 +2449,7 @@
       const subExe = document.getElementById("sub-exe");
       const titleZip = document.getElementById("title-zip");
       const subZip = document.getElementById("sub-zip");
+      const lblDlCount = document.getElementById("label-dl-count");
 
       if (lang === "bn") {
         const bnTab = document.getElementById("lang-bn");
@@ -2379,6 +2466,7 @@
         if (subExe) subExe.innerText = "iROP Quick Access V.1.1 (37mb)";
         if (titleZip) titleZip.innerText = "Download ZIP";
         if (subZip) subZip.innerText = "iROP Quick Access V.1.1 (37mb)";
+        if (lblDlCount) lblDlCount.innerText = "মোট ডাউনলোড:";
       } else {
         const enTab = document.getElementById("lang-en");
         const enBtn = document.getElementById("btn-en");
@@ -2394,6 +2482,7 @@
         if (subExe) subExe.innerText = "iROP Quick Access V.1.1 (37mb)";
         if (titleZip) titleZip.innerText = "Download ZIP";
         if (subZip) subZip.innerText = "iROP Quick Access V.1.1 (37mb)";
+        if (lblDlCount) lblDlCount.innerText = "Total Downloads:";
       }
 
       filterSections(currentFilter);
@@ -2447,7 +2536,90 @@
 
       switchLanguage(savedLang);
       filterSections(savedFilter);
+      fetchGitHubDownloadStats();
     });
+
+    // GitHub Releases API Combined Downloads Counter (EXE + ZIP)
+    async function fetchGitHubDownloadStats() {
+      const repo = "shamssohag/iROP-Quick-Access";
+      const apiUrl = `https://api.github.com/repos/${repo}/releases`;
+      
+      const totalCountEl = document.getElementById("total-download-count");
+      const detailsEl = document.getElementById("dl-counter-details");
+      const exeCountEl = document.getElementById("count-exe");
+      const zipCountEl = document.getElementById("count-zip");
+      
+      try {
+        const response = await fetch(apiUrl, {
+          headers: {
+            "Accept": "application/vnd.github.v3+json"
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`GitHub API error: ${response.status}`);
+        }
+        
+        const releases = await response.json();
+        let total = 0;
+        let exeCount = 0;
+        let zipCount = 0;
+        
+        if (Array.isArray(releases)) {
+          releases.forEach(rel => {
+            if (rel.assets && Array.isArray(rel.assets)) {
+              rel.assets.forEach(asset => {
+                const name = (asset.name || "").toLowerCase();
+                const dCount = asset.download_count || 0;
+                total += dCount;
+                if (name.endsWith(".exe")) {
+                  exeCount += dCount;
+                } else if (name.endsWith(".zip")) {
+                  zipCount += dCount;
+                }
+              });
+            }
+          });
+        }
+        
+        if (totalCountEl) {
+          totalCountEl.innerText = total.toLocaleString();
+        }
+        if (exeCountEl) {
+          exeCountEl.innerText = exeCount.toLocaleString();
+        }
+        if (zipCountEl) {
+          zipCountEl.innerText = zipCount.toLocaleString();
+        }
+        if (detailsEl && total > 0) {
+          detailsEl.style.display = "inline";
+        }
+        
+        // Cache in localStorage to ensure persistence across reloads / offline
+        try {
+          localStorage.setItem("irop_dl_stats", JSON.stringify({
+            total, exeCount, zipCount, timestamp: Date.now()
+          }));
+        } catch(e) {}
+      } catch (err) {
+        console.warn("Could not fetch live GitHub download stats:", err);
+        // Fallback to cached stats if available
+        try {
+          const cached = JSON.parse(localStorage.getItem("irop_dl_stats"));
+          if (cached && totalCountEl) {
+            totalCountEl.innerText = (cached.total || 0).toLocaleString();
+            if (exeCountEl) exeCountEl.innerText = (cached.exeCount || 0).toLocaleString();
+            if (zipCountEl) zipCountEl.innerText = (cached.zipCount || 0).toLocaleString();
+            if (detailsEl && cached.total > 0) detailsEl.style.display = "inline";
+            return;
+          }
+        } catch(e) {}
+        
+        if (totalCountEl) {
+          totalCountEl.innerText = "Active";
+        }
+      }
+    }
   </script>
 </body>
 </html>

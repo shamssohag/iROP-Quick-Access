@@ -819,8 +819,8 @@
       
       <!-- Highlighted Hero Download Buttons (Direct 1-Click EXE and ZIP) -->
       <div class="hero-download-wrapper">
-        <!-- Direct EXE Download Button (Dropbox) -->
-        <a href="https://www.dropbox.com/scl/fi/5fnlvjpml6qhl79uwxmv5/iROP-Quick-Access-V.1.1.exe?rlkey=f5z4siytw5yvj8odkc74vukjn&st=bjl5rpj0&dl=1" class="download-btn hero-download-btn btn-exe" id="hero-download-exe">
+        <!-- Official GitHub Release EXE Download Button -->
+        <a href="https://github.com/shamssohag/iROP-Quick-Access/releases/download/v1.1/iROP.Quick.Access.V.1.1.exe" class="download-btn hero-download-btn btn-exe" id="hero-download-exe">
           <div class="hero-dl-icon-box">
             <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -832,8 +832,8 @@
           </div>
         </a>
 
-        <!-- Direct ZIP Download Button (Dropbox) -->
-        <a href="https://www.dropbox.com/scl/fi/aittafemcbqwls8vki8r3/iROP-Quick-Access-V.1.1.zip?rlkey=xa8317g24l5jn1f3eweuikubm&st=cwgvei8d&dl=1" class="download-btn hero-download-btn btn-zip" id="hero-download-zip">
+        <!-- Official GitHub Release ZIP Download Button -->
+        <a href="https://github.com/shamssohag/iROP-Quick-Access/releases/download/v1.1/iROP.Quick.Access.V.1.1.zip" class="download-btn hero-download-btn btn-zip" id="hero-download-zip">
           <div class="hero-dl-icon-box">
             <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
@@ -854,7 +854,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
           <span id="dl-counter-text" class="dl-counter-text">
-            <span id="label-dl-count">Total Downloads:</span> <strong id="total-download-count">3</strong>
+            <span id="label-dl-count">Total Downloads:</span> <strong id="total-download-count">0</strong>
           </span>
         </div>
       </div>
@@ -2530,54 +2530,26 @@
       initDownloadCounter();
     });
 
-    // Robust Multi-Layer Download Counter (Instant Persistence + Cloud Sync + No Refresh Reset)
-    const COUNTER_NAMESPACE = "shamssohag-irop-quick-access";
-    let currentTotalDownloads = 3; // Baseline from user confirmed download tests
-
-    function getStoredDownloadCount() {
-      try {
-        const val = localStorage.getItem("irop_total_downloads");
-        if (val !== null) {
-          const n = parseInt(val, 10);
-          if (!isNaN(n) && n >= 0) return n;
-        }
-      } catch(e) {}
-      return 3;
-    }
+    // Official GitHub Releases API Live Downloads Counter (100% Synchronized Across All Browsers & Devices)
+    const GITHUB_REPO = "shamssohag/iROP-Quick-Access";
+    let liveDownloadTotal = 0;
 
     function renderTotalDownloadCount(count) {
-      currentTotalDownloads = Math.max(3, count);
+      liveDownloadTotal = Math.max(0, count);
       const totalCountEl = document.getElementById("total-download-count");
       if (totalCountEl) {
-        totalCountEl.innerText = currentTotalDownloads.toLocaleString();
+        totalCountEl.innerText = liveDownloadTotal.toLocaleString();
       }
-      try {
-        localStorage.setItem("irop_total_downloads", currentTotalDownloads);
-      } catch(e) {}
     }
 
+    // Instant click feedback
     function onDownloadClicked() {
-      // 1. Instant local increment & immediate persistence (Never resets to 0 on refresh!)
-      const nextCount = Math.max(currentTotalDownloads, getStoredDownloadCount()) + 1;
-      renderTotalDownloadCount(nextCount);
-
-      // 2. Backend cloud persistence with keepalive (Guaranteed not to abort when downloading!)
-      try {
-        const upUrl = `https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads/up`;
-        if (navigator.sendBeacon) {
-          navigator.sendBeacon(upUrl);
-        } else {
-          fetch(upUrl, { method: "GET", mode: "cors", keepalive: true }).catch(() => {});
-        }
-      } catch(e) {}
+      liveDownloadTotal += 1;
+      renderTotalDownloadCount(liveDownloadTotal);
     }
 
     async function initDownloadCounter() {
-      // 1. Immediate instant load from storage (Zero delay, never shows 0 on refresh!)
-      const savedCount = getStoredDownloadCount();
-      renderTotalDownloadCount(savedCount);
-
-      // 2. Attach instant click listeners to both download buttons
+      // 1. Attach instant click listeners to both download buttons
       const btnExe = document.getElementById("hero-download-exe");
       if (btnExe && !btnExe._counterBound) {
         btnExe._counterBound = true;
@@ -2590,39 +2562,31 @@
         btnZip.addEventListener("click", onDownloadClicked);
       }
 
-      // 3. Sync from Cloud CounterAPI
+      // 2. Fetch official global download counts directly from GitHub Releases API
       try {
-        const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads`, { mode: "cors" });
-        if (res.ok) {
-          const data = await res.json();
-          if (data && typeof data.count === "number" && data.count > currentTotalDownloads) {
-            renderTotalDownloadCount(data.count);
-          }
-        }
-      } catch(e) {}
-
-      // 4. Sync from GitHub Releases API if available
-      try {
-        const ghRes = await fetch("https://api.github.com/repos/shamssohag/iROP-Quick-Access/releases", {
+        const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/releases`, {
           headers: { "Accept": "application/vnd.github.v3+json" }
         });
-        if (ghRes.ok) {
-          const releases = await ghRes.json();
-          let ghTotal = 0;
+        if (res.ok) {
+          const releases = await res.json();
+          let total = 0;
           if (Array.isArray(releases)) {
             releases.forEach(rel => {
               if (rel.assets && Array.isArray(rel.assets)) {
                 rel.assets.forEach(asset => {
-                  ghTotal += (asset.download_count || 0);
+                  const name = (asset.name || "").toLowerCase();
+                  if (name.endsWith(".exe") || name.endsWith(".zip")) {
+                    total += (asset.download_count || 0);
+                  }
                 });
               }
             });
           }
-          if (ghTotal > currentTotalDownloads) {
-            renderTotalDownloadCount(ghTotal);
-          }
+          renderTotalDownloadCount(total);
         }
-      } catch(e) {}
+      } catch(err) {
+        console.warn("Could not fetch GitHub download count:", err);
+      }
     }
   </script>
 </body>

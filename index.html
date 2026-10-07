@@ -215,13 +215,7 @@
       font-size: 11px;
     }
 
-    .dl-counter-details {
-      font-size: 9.5px;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-left: 2px;
-      font-family: 'JetBrains Mono', monospace;
-    }
+
 
     .hero-download-btn.btn-exe {
       background: linear-gradient(135deg, #0078d7 0%, #0284c7 40%, #2563eb 100%);
@@ -825,7 +819,7 @@
       
       <!-- Highlighted Hero Download Buttons (Direct 1-Click EXE and ZIP) -->
       <div class="hero-download-wrapper">
-        <!-- Direct EXE Download Button -->
+        <!-- Direct EXE Download Button (Dropbox) -->
         <a href="https://www.dropbox.com/scl/fi/5fnlvjpml6qhl79uwxmv5/iROP-Quick-Access-V.1.1.exe?rlkey=f5z4siytw5yvj8odkc74vukjn&st=bjl5rpj0&dl=1" class="download-btn hero-download-btn btn-exe" id="hero-download-exe">
           <div class="hero-dl-icon-box">
             <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -838,7 +832,7 @@
           </div>
         </a>
 
-        <!-- Direct ZIP Download Button -->
+        <!-- Direct ZIP Download Button (Dropbox) -->
         <a href="https://www.dropbox.com/scl/fi/aittafemcbqwls8vki8r3/iROP-Quick-Access-V.1.1.zip?rlkey=xa8317g24l5jn1f3eweuikubm&st=cwgvei8d&dl=1" class="download-btn hero-download-btn btn-zip" id="hero-download-zip">
           <div class="hero-dl-icon-box">
             <svg class="dl-hero-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -852,7 +846,7 @@
         </a>
       </div>
 
-      <!-- Live GitHub Combined Downloads Counter Badge (EXE + ZIP) -->
+      <!-- Live Total Downloads Counter Badge (Single Unified Total Display) -->
       <div style="text-align: center;">
         <div class="download-counter-badge" id="dl-counter-badge">
           <span class="dl-counter-pulse"></span>
@@ -860,10 +854,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
           <span id="dl-counter-text" class="dl-counter-text">
-            <span id="label-dl-count">Total Downloads:</span> <strong id="total-download-count">Loading...</strong>
-          </span>
-          <span class="dl-counter-details" id="dl-counter-details" style="display: none;">
-            (EXE: <span id="count-exe">0</span> + ZIP: <span id="count-zip">0</span>)
+            <span id="label-dl-count">Total Downloads:</span> <strong id="total-download-count">0</strong>
           </span>
         </div>
       </div>
@@ -2536,127 +2527,63 @@
 
       switchLanguage(savedLang);
       filterSections(savedFilter);
-      fetchGitHubDownloadStats();
+      initDownloadCounter();
     });
 
-    // Hybrid Real-Time Download Counter (Click Tracking + Cloud CounterAPI + GitHub Releases)
+    // Global Backend Download Counter & Click Tracker
     const COUNTER_NAMESPACE = "shamssohag-irop-quick-access";
-    let liveTotal = 0;
-    let liveExe = 0;
-    let liveZip = 0;
+    let currentTotalDownloads = 0;
 
-    function renderDownloadStats(total, exe, zip) {
-      liveTotal = Math.max(0, total);
-      liveExe = Math.max(0, exe);
-      liveZip = Math.max(0, zip);
-
+    function renderTotalDownloadCount(count) {
+      currentTotalDownloads = Math.max(0, count);
       const totalCountEl = document.getElementById("total-download-count");
-      const detailsEl = document.getElementById("dl-counter-details");
-      const exeCountEl = document.getElementById("count-exe");
-      const zipCountEl = document.getElementById("count-zip");
-
       if (totalCountEl) {
-        totalCountEl.innerText = liveTotal.toLocaleString();
+        totalCountEl.innerText = currentTotalDownloads.toLocaleString();
       }
-      if (exeCountEl) {
-        exeCountEl.innerText = liveExe.toLocaleString();
-      }
-      if (zipCountEl) {
-        zipCountEl.innerText = liveZip.toLocaleString();
-      }
-      if (detailsEl) {
-        detailsEl.style.display = liveTotal > 0 ? "inline" : "none";
-      }
-
-      try {
-        localStorage.setItem("irop_dl_stats", JSON.stringify({
-          total: liveTotal,
-          exe: liveExe,
-          zip: liveZip,
-          timestamp: Date.now()
-        }));
-      } catch(e) {}
     }
 
-    // Called on every click on "Download EXE" or "Download ZIP"
-    function recordDownloadClick(type) {
-      liveTotal += 1;
-      if (type === "exe") liveExe += 1;
-      if (type === "zip") liveZip += 1;
-      renderDownloadStats(liveTotal, liveExe, liveZip);
+    function onDownloadClicked() {
+      // Instant visual increment on click
+      currentTotalDownloads += 1;
+      renderTotalDownloadCount(currentTotalDownloads);
 
-      // Persist to Cloud CounterAPI in background
+      // Backend increment call
       try {
         fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads/up`, {
           method: "GET",
           mode: "cors"
+        }).then(res => res.json()).then(data => {
+          if (data && typeof data.count === "number") {
+            renderTotalDownloadCount(data.count);
+          }
         }).catch(() => {});
       } catch(e) {}
     }
 
-    async function fetchGitHubDownloadStats() {
-      // 1. Instant load from localStorage so it never starts with 0 if already clicked
-      try {
-        const cached = JSON.parse(localStorage.getItem("irop_dl_stats"));
-        if (cached && typeof cached.total === "number" && cached.total > 0) {
-          renderDownloadStats(cached.total, cached.exe || 0, cached.zip || 0);
-        }
-      } catch(e) {}
-
-      // 2. Attach instant click listeners to both download buttons
+    async function initDownloadCounter() {
+      // 1. Attach instant click listeners to both download buttons
       const btnExe = document.getElementById("hero-download-exe");
-      if (btnExe && !btnExe._trackerBound) {
-        btnExe._trackerBound = true;
-        btnExe.addEventListener("click", () => recordDownloadClick("exe"));
+      if (btnExe && !btnExe._counterBound) {
+        btnExe._counterBound = true;
+        btnExe.addEventListener("click", onDownloadClicked);
       }
 
       const btnZip = document.getElementById("hero-download-zip");
-      if (btnZip && !btnZip._trackerBound) {
-        btnZip._trackerBound = true;
-        btnZip.addEventListener("click", () => recordDownloadClick("zip"));
+      if (btnZip && !btnZip._counterBound) {
+        btnZip._counterBound = true;
+        btnZip.addEventListener("click", onDownloadClicked);
       }
 
-      // 3. Fetch from Cloud CounterAPI
-      let cloudTotal = 0;
+      // 2. Fetch current total from backend
       try {
-        const cRes = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads`, { mode: "cors" });
-        if (cRes.ok) {
-          const cData = await cRes.json();
-          if (cData && typeof cData.count === "number") {
-            cloudTotal = cData.count;
+        const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads`, { mode: "cors" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.count === "number") {
+            renderTotalDownloadCount(data.count);
           }
         }
-      } catch (err) {}
-
-      // 4. Fetch from GitHub Releases API
-      let ghTotal = 0, ghExe = 0, ghZip = 0;
-      try {
-        const ghRes = await fetch("https://api.github.com/repos/shamssohag/iROP-Quick-Access/releases", {
-          headers: { "Accept": "application/vnd.github.v3+json" }
-        });
-        if (ghRes.ok) {
-          const releases = await ghRes.json();
-          if (Array.isArray(releases)) {
-            releases.forEach(rel => {
-              if (rel.assets && Array.isArray(rel.assets)) {
-                rel.assets.forEach(asset => {
-                  const name = (asset.name || "").toLowerCase();
-                  const dCount = asset.download_count || 0;
-                  ghTotal += dCount;
-                  if (name.endsWith(".exe")) ghExe += dCount;
-                  else if (name.endsWith(".zip")) ghZip += dCount;
-                });
-              }
-            });
-          }
-        }
-      } catch (err) {}
-
-      // Combine Cloud Clicks + GitHub Releases + Local Clicks
-      const bestTotal = Math.max(liveTotal, cloudTotal + ghTotal);
-      const bestExe = Math.max(liveExe, ghExe);
-      const bestZip = Math.max(liveZip, ghZip);
-      renderDownloadStats(bestTotal, bestExe, bestZip);
+      } catch(e) {}
     }
   </script>
 </body>

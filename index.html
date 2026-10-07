@@ -2539,86 +2539,124 @@
       fetchGitHubDownloadStats();
     });
 
-    // GitHub Releases API Combined Downloads Counter (EXE + ZIP)
-    async function fetchGitHubDownloadStats() {
-      const repo = "shamssohag/iROP-Quick-Access";
-      const apiUrl = `https://api.github.com/repos/${repo}/releases`;
-      
+    // Hybrid Real-Time Download Counter (Click Tracking + Cloud CounterAPI + GitHub Releases)
+    const COUNTER_NAMESPACE = "shamssohag-irop-quick-access";
+    let liveTotal = 0;
+    let liveExe = 0;
+    let liveZip = 0;
+
+    function renderDownloadStats(total, exe, zip) {
+      liveTotal = Math.max(0, total);
+      liveExe = Math.max(0, exe);
+      liveZip = Math.max(0, zip);
+
       const totalCountEl = document.getElementById("total-download-count");
       const detailsEl = document.getElementById("dl-counter-details");
       const exeCountEl = document.getElementById("count-exe");
       const zipCountEl = document.getElementById("count-zip");
-      
-      try {
-        const response = await fetch(apiUrl, {
-          headers: {
-            "Accept": "application/vnd.github.v3+json"
-          }
-        });
-        
-        if (!response.ok) {
-          throw new Error(`GitHub API error: ${response.status}`);
-        }
-        
-        const releases = await response.json();
-        let total = 0;
-        let exeCount = 0;
-        let zipCount = 0;
-        
-        if (Array.isArray(releases)) {
-          releases.forEach(rel => {
-            if (rel.assets && Array.isArray(rel.assets)) {
-              rel.assets.forEach(asset => {
-                const name = (asset.name || "").toLowerCase();
-                const dCount = asset.download_count || 0;
-                total += dCount;
-                if (name.endsWith(".exe")) {
-                  exeCount += dCount;
-                } else if (name.endsWith(".zip")) {
-                  zipCount += dCount;
-                }
-              });
-            }
-          });
-        }
-        
-        if (totalCountEl) {
-          totalCountEl.innerText = total.toLocaleString();
-        }
-        if (exeCountEl) {
-          exeCountEl.innerText = exeCount.toLocaleString();
-        }
-        if (zipCountEl) {
-          zipCountEl.innerText = zipCount.toLocaleString();
-        }
-        if (detailsEl && total > 0) {
-          detailsEl.style.display = "inline";
-        }
-        
-        // Cache in localStorage to ensure persistence across reloads / offline
-        try {
-          localStorage.setItem("irop_dl_stats", JSON.stringify({
-            total, exeCount, zipCount, timestamp: Date.now()
-          }));
-        } catch(e) {}
-      } catch (err) {
-        console.warn("Could not fetch live GitHub download stats:", err);
-        // Fallback to cached stats if available
-        try {
-          const cached = JSON.parse(localStorage.getItem("irop_dl_stats"));
-          if (cached && totalCountEl) {
-            totalCountEl.innerText = (cached.total || 0).toLocaleString();
-            if (exeCountEl) exeCountEl.innerText = (cached.exeCount || 0).toLocaleString();
-            if (zipCountEl) zipCountEl.innerText = (cached.zipCount || 0).toLocaleString();
-            if (detailsEl && cached.total > 0) detailsEl.style.display = "inline";
-            return;
-          }
-        } catch(e) {}
-        
-        if (totalCountEl) {
-          totalCountEl.innerText = "Active";
-        }
+
+      if (totalCountEl) {
+        totalCountEl.innerText = liveTotal.toLocaleString();
       }
+      if (exeCountEl) {
+        exeCountEl.innerText = liveExe.toLocaleString();
+      }
+      if (zipCountEl) {
+        zipCountEl.innerText = liveZip.toLocaleString();
+      }
+      if (detailsEl) {
+        detailsEl.style.display = liveTotal > 0 ? "inline" : "none";
+      }
+
+      try {
+        localStorage.setItem("irop_dl_stats", JSON.stringify({
+          total: liveTotal,
+          exe: liveExe,
+          zip: liveZip,
+          timestamp: Date.now()
+        }));
+      } catch(e) {}
+    }
+
+    // Called on every click on "Download EXE" or "Download ZIP"
+    function recordDownloadClick(type) {
+      liveTotal += 1;
+      if (type === "exe") liveExe += 1;
+      if (type === "zip") liveZip += 1;
+      renderDownloadStats(liveTotal, liveExe, liveZip);
+
+      // Persist to Cloud CounterAPI in background
+      try {
+        fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads/up`, {
+          method: "GET",
+          mode: "cors"
+        }).catch(() => {});
+      } catch(e) {}
+    }
+
+    async function fetchGitHubDownloadStats() {
+      // 1. Instant load from localStorage so it never starts with 0 if already clicked
+      try {
+        const cached = JSON.parse(localStorage.getItem("irop_dl_stats"));
+        if (cached && typeof cached.total === "number" && cached.total > 0) {
+          renderDownloadStats(cached.total, cached.exe || 0, cached.zip || 0);
+        }
+      } catch(e) {}
+
+      // 2. Attach instant click listeners to both download buttons
+      const btnExe = document.getElementById("hero-download-exe");
+      if (btnExe && !btnExe._trackerBound) {
+        btnExe._trackerBound = true;
+        btnExe.addEventListener("click", () => recordDownloadClick("exe"));
+      }
+
+      const btnZip = document.getElementById("hero-download-zip");
+      if (btnZip && !btnZip._trackerBound) {
+        btnZip._trackerBound = true;
+        btnZip.addEventListener("click", () => recordDownloadClick("zip"));
+      }
+
+      // 3. Fetch from Cloud CounterAPI
+      let cloudTotal = 0;
+      try {
+        const cRes = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads`, { mode: "cors" });
+        if (cRes.ok) {
+          const cData = await cRes.json();
+          if (cData && typeof cData.count === "number") {
+            cloudTotal = cData.count;
+          }
+        }
+      } catch (err) {}
+
+      // 4. Fetch from GitHub Releases API
+      let ghTotal = 0, ghExe = 0, ghZip = 0;
+      try {
+        const ghRes = await fetch("https://api.github.com/repos/shamssohag/iROP-Quick-Access/releases", {
+          headers: { "Accept": "application/vnd.github.v3+json" }
+        });
+        if (ghRes.ok) {
+          const releases = await ghRes.json();
+          if (Array.isArray(releases)) {
+            releases.forEach(rel => {
+              if (rel.assets && Array.isArray(rel.assets)) {
+                rel.assets.forEach(asset => {
+                  const name = (asset.name || "").toLowerCase();
+                  const dCount = asset.download_count || 0;
+                  ghTotal += dCount;
+                  if (name.endsWith(".exe")) ghExe += dCount;
+                  else if (name.endsWith(".zip")) ghZip += dCount;
+                });
+              }
+            });
+          }
+        }
+      } catch (err) {}
+
+      // Combine Cloud Clicks + GitHub Releases + Local Clicks
+      const bestTotal = Math.max(liveTotal, cloudTotal + ghTotal);
+      const bestExe = Math.max(liveExe, ghExe);
+      const bestZip = Math.max(liveZip, ghZip);
+      renderDownloadStats(bestTotal, bestExe, bestZip);
     }
   </script>
 </body>

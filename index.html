@@ -854,7 +854,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
           <span id="dl-counter-text" class="dl-counter-text">
-            <span id="label-dl-count">Total Downloads:</span> <strong id="total-download-count">0</strong>
+            <span id="label-dl-count">Total Downloads:</span> <strong id="total-download-count">3</strong>
           </span>
         </div>
       </div>
@@ -2530,38 +2530,54 @@
       initDownloadCounter();
     });
 
-    // Global Backend Download Counter & Click Tracker
+    // Robust Multi-Layer Download Counter (Instant Persistence + Cloud Sync + No Refresh Reset)
     const COUNTER_NAMESPACE = "shamssohag-irop-quick-access";
-    let currentTotalDownloads = 0;
+    let currentTotalDownloads = 3; // Baseline from user confirmed download tests
+
+    function getStoredDownloadCount() {
+      try {
+        const val = localStorage.getItem("irop_total_downloads");
+        if (val !== null) {
+          const n = parseInt(val, 10);
+          if (!isNaN(n) && n >= 0) return n;
+        }
+      } catch(e) {}
+      return 3;
+    }
 
     function renderTotalDownloadCount(count) {
-      currentTotalDownloads = Math.max(0, count);
+      currentTotalDownloads = Math.max(3, count);
       const totalCountEl = document.getElementById("total-download-count");
       if (totalCountEl) {
         totalCountEl.innerText = currentTotalDownloads.toLocaleString();
       }
+      try {
+        localStorage.setItem("irop_total_downloads", currentTotalDownloads);
+      } catch(e) {}
     }
 
     function onDownloadClicked() {
-      // Instant visual increment on click
-      currentTotalDownloads += 1;
-      renderTotalDownloadCount(currentTotalDownloads);
+      // 1. Instant local increment & immediate persistence (Never resets to 0 on refresh!)
+      const nextCount = Math.max(currentTotalDownloads, getStoredDownloadCount()) + 1;
+      renderTotalDownloadCount(nextCount);
 
-      // Backend increment call
+      // 2. Backend cloud persistence with keepalive (Guaranteed not to abort when downloading!)
       try {
-        fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads/up`, {
-          method: "GET",
-          mode: "cors"
-        }).then(res => res.json()).then(data => {
-          if (data && typeof data.count === "number") {
-            renderTotalDownloadCount(data.count);
-          }
-        }).catch(() => {});
+        const upUrl = `https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads/up`;
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(upUrl);
+        } else {
+          fetch(upUrl, { method: "GET", mode: "cors", keepalive: true }).catch(() => {});
+        }
       } catch(e) {}
     }
 
     async function initDownloadCounter() {
-      // 1. Attach instant click listeners to both download buttons
+      // 1. Immediate instant load from storage (Zero delay, never shows 0 on refresh!)
+      const savedCount = getStoredDownloadCount();
+      renderTotalDownloadCount(savedCount);
+
+      // 2. Attach instant click listeners to both download buttons
       const btnExe = document.getElementById("hero-download-exe");
       if (btnExe && !btnExe._counterBound) {
         btnExe._counterBound = true;
@@ -2574,13 +2590,36 @@
         btnZip.addEventListener("click", onDownloadClicked);
       }
 
-      // 2. Fetch current total from backend
+      // 3. Sync from Cloud CounterAPI
       try {
         const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/total_downloads`, { mode: "cors" });
         if (res.ok) {
           const data = await res.json();
-          if (data && typeof data.count === "number") {
+          if (data && typeof data.count === "number" && data.count > currentTotalDownloads) {
             renderTotalDownloadCount(data.count);
+          }
+        }
+      } catch(e) {}
+
+      // 4. Sync from GitHub Releases API if available
+      try {
+        const ghRes = await fetch("https://api.github.com/repos/shamssohag/iROP-Quick-Access/releases", {
+          headers: { "Accept": "application/vnd.github.v3+json" }
+        });
+        if (ghRes.ok) {
+          const releases = await ghRes.json();
+          let ghTotal = 0;
+          if (Array.isArray(releases)) {
+            releases.forEach(rel => {
+              if (rel.assets && Array.isArray(rel.assets)) {
+                rel.assets.forEach(asset => {
+                  ghTotal += (asset.download_count || 0);
+                });
+              }
+            });
+          }
+          if (ghTotal > currentTotalDownloads) {
+            renderTotalDownloadCount(ghTotal);
           }
         }
       } catch(e) {}

@@ -857,10 +857,12 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              You have four flexible methods:
+              You have six flexible and lightning-fast methods:
               <ol>
-                <li><strong>Drag &amp; Drop (Fastest):</strong> Drag any folder, drive, software (.exe/.lnk), document, or <strong>web link/URL directly from any browser</strong> (Chrome, Edge, Firefox) into the app window.</li>
-                <li><strong>Top Bar Menu:</strong> Click the <span class="code-inline">➕ Add Folder/App</span> button on the top toolbar and select <span class="code-inline">📁 Add Folder or Drive...</span>, <span class="code-inline">⚡ Add Application or File...</span>, or <span class="code-inline">🌐 Add Website / Web Link...</span>.</li>
+                <li><strong>Universal Keyboard Shortcuts (Fastest):</strong> Press <span class="code-inline">Ctrl+Shift+F</span> to browse for a Folder/Drive, <span class="code-inline">Ctrl+Shift+A</span> (or <span class="code-inline">Ctrl+O</span>) for Application/File, <span class="code-inline">Ctrl+Shift+W</span> for Web Link, or <span class="code-inline">Ctrl+Shift+G</span> to Make a New Group.</li>
+                <li><strong>Canvas Right-Click Context Menu:</strong> Right-click anywhere on the empty grid background to immediately open the Add Folder, Add App/File, Add Web Link, or Make New Group context menu.</li>
+                <li><strong>Drag &amp; Drop:</strong> Drag any folder, drive partition, software (.exe/.lnk), document, or <strong>web link/URL directly from any browser</strong> (Chrome, Edge, Firefox) into the app window.</li>
+                <li><strong>Top Bar Menu:</strong> Click the <span class="code-inline">➕ Add Folder/App</span> button on the top toolbar and select from the dropdown with visible keyboard shortcut hints.</li>
                 <li><strong>Add Web Link Dialog:</strong> Open <span class="code-inline">🌐 Add Website / Web Link...</span>, paste any URL (e.g. <span class="code-inline">github.com</span> or <span class="code-inline">https://google.com</span>), and optionally enter a custom title.</li>
                 <li><strong>Batch Import:</strong> Click <span class="code-inline">📥 Import Quick Access</span> or <span class="code-inline">📂 Import Open Windows</span> to import multiple locations simultaneously.</li>
               </ol>
@@ -982,10 +984,12 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              Located between the Theme button and About button, the <span class="code-inline">💾 Save</span> dropdown menu provides:
+              Located between the Theme button and About button, the <span class="code-inline">💾 Save</span> dropdown menu (with universal hotkeys) provides:
               <ul>
-                <li><strong>Export Shortcuts...:</strong> Saves your complete list of shortcuts, custom names, pin statuses, and click history into a portable backup file.</li>
-                <li><strong>Import Shortcuts...:</strong> Restores or merges shortcuts from any previously saved backup file.</li>
+                <li><strong>Save Current as Named Preset... (<span class="code-inline">Ctrl+S</span>):</strong> Prompts you for a friendly name (e.g., <em>Work</em>, <em>Video Editing</em>, <em>Daily</em>) and creates a dedicated profile with overwrite confirmation.</li>
+                <li><strong>Export Shortcuts Backup... (<span class="code-inline">Ctrl+E</span>):</strong> Saves your complete list of shortcuts, custom names, group assignments, pin statuses, and click history into a portable JSON backup file.</li>
+                <li><strong>Import Shortcuts Backup... (<span class="code-inline">Ctrl+I</span>):</strong> Restores or merges shortcuts from any previously saved backup file.</li>
+                <li><strong>Recent Presets (Last 10):</strong> Fast 1-click loading of your last 10 exported or saved preset files.</li>
                 <li><strong>Clear All Shortcuts...:</strong> Safely clears all shortcut cards after prompting for confirmation.</li>
               </ul>
             </div>
@@ -1124,8 +1128,9 @@
             <div class="faq-answer-inner">
               Right-click on any card to access advanced shortcut options:
               <ul>
-                <li><strong>⌨️ Assign Shortcut Key...:</strong> Assigns a fast keyboard hotkey (such as <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Ctrl+Alt+D</span>, or <span class="code-inline">F2</span>). Whenever iROP Quick Access is active, pressing that key combination immediately launches that folder or app. An indicator badge (e.g. <span class="code-inline">[Ctrl+1]</span>) is displayed on the card footer.</li>
-                <li><strong>🖥️ Create Desktop Shortcut:</strong> Generates a standard Windows shortcut file (<span class="code-inline">.lnk</span>) directly on your Windows Desktop for that location.</li>
+                <li><strong>⌨️ Assign Shortcut Key...:</strong> Assigns a fast keyboard hotkey (such as <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Alt+1</span>, or <span class="code-inline">F2</span>). Whenever iROP Quick Access is active, pressing that key combination immediately launches that folder, software, or web link. An indicator badge (e.g. <span class="code-inline">[Ctrl+1]</span>) is displayed on the card footer.</li>
+                <li><strong>Strict Conflict Protection:</strong> Universal system shortcuts (<span class="code-inline">Ctrl+S</span>, <span class="code-inline">Ctrl+E</span>, <span class="code-inline">Ctrl+I</span>, <span class="code-inline">Ctrl+Shift+F</span>, etc.) and duplicate card hotkeys are <strong>strictly protected against overwriting</strong>. If you enter a conflicting key, the dialog shows a red warning and provides a 1-click <span class="code-inline">💡 Suggest: [Ctrl+1]</span> button to automatically assign the next available, conflict-free hotkey.</li>
+                <li><strong>🖥️ Create Desktop Shortcut:</strong> Generates a standard Windows shortcut file (<span class="code-inline">.lnk</span> for files/folders, or <span class="code-inline">.url</span> for web links) directly on your Windows Desktop.</li>
               </ul>
             </div>
           </div>
@@ -1240,7 +1245,8 @@
                 <li><strong>Dynamic "+ Add Group" Placement:</strong> The <span class="code-inline">➕ Add Group</span> button sits directly underneath the last group item and automatically moves down as new groups are added.</li>
                 <li><strong>🎨 Group Tab Coloring:</strong> Right-click any group item &rarr; <span class="code-inline">🎨 Group Color</span> to personalize tabs with 8 elegant color swatches (Slate Navy, Ocean Blue, Forest Mint, Soft Lavender, Warm Sand, Amber, etc.). Group colors persist permanently across restarts and named presets!</li>
                 <li><strong>Top Default Group:</strong> The top group (<em>Default</em>) is permanent and cannot be deleted.</li>
-                <li><strong>Safe Group Deletion:</strong> Deleting a custom group asks for confirmation and automatically moves all its shortcuts to the Default group so nothing is ever lost.</li>
+                <li><strong>Total Groups Count Badge:</strong> The top header of the Groups sidebar features a real-time badge displaying the total number of active groups.</li>
+                <li><strong>All-Cards Group Deletion:</strong> Deleting a custom group prompts for confirmation and permanently removes the group along with all its member shortcuts upon clicking Yes. Clicking No safely cancels the deletion.</li>
                 <li><strong>Effortless Card Transfer:</strong> Right-click any card &rarr; <span class="code-inline">📁 Move to Group</span>, or simply drag and drop a card from the grid onto any group in the sidebar!</li>
               </ul>
             </div>
@@ -1263,6 +1269,36 @@
                 <li><strong>Dedicated "📁 Change Location" Button:</strong> In the Recent Download tab, a visible <span class="code-inline">📁 Change Location</span> button lets you switch the watched directory to any custom folder (e.g. project rendering directory). Any file or folder created there appears live!</li>
                 <li><strong>Optimized 410px Splitter Ratio:</strong> The right panel defaults to a comfortable 410px width so both tabs, full filenames, and action buttons fit with ample breathing room.</li>
                 <li><strong>1-Click Actions on Every Row:</strong> Click any row to launch, click <span class="code-inline">📂</span> to reveal in File Explorer, or click <span class="code-inline">＋</span> to instantly pin the file/folder to your currently active group in the main shortcut grid!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q22: How do Universal Shortcuts, Canvas Right-Click Menu &amp; Exit Warning work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>Workflow Accelerators &amp; Safety Controls:</strong>
+              <ul>
+                <li><strong>Window Exit (✕) Confirmation:</strong> Clicking the top-right close button (✕) or pressing Alt+F4 prompts a clean Yes/No confirmation dialog to prevent accidental app closures.</li>
+                <li><strong>Empty Canvas Right-Click Menu:</strong> Right-clicking anywhere on the empty grid canvas opens a full productivity menu with options to Add Folder, Add App/File, Add Web Link, Make New Group, and Preset options.</li>
+                <li><strong>Universal Keyboard Shortcuts:</strong>
+                  <ul>
+                    <li><span class="code-inline">Ctrl+S</span>: Save Current as Preset...</li>
+                    <li><span class="code-inline">Ctrl+E</span>: Export Shortcuts Backup...</li>
+                    <li><span class="code-inline">Ctrl+I</span>: Import Shortcuts Backup...</li>
+                    <li><span class="code-inline">Ctrl+Shift+F</span>: Add Folder or Drive...</li>
+                    <li><span class="code-inline">Ctrl+Shift+A</span> / <span class="code-inline">Ctrl+O</span>: Add Application / File...</li>
+                    <li><span class="code-inline">Ctrl+Shift+W</span>: Add Website / Web Link...</li>
+                    <li><span class="code-inline">Ctrl+Shift+G</span> / <span class="code-inline">Ctrl+Shift+N</span>: Make New Group...</li>
+                  </ul>
+                </li>
+                <li><strong>Strict Conflict Protection &amp; Smart Suggestion:</strong> Universal system shortcuts (<span class="code-inline">Ctrl+S</span>, <span class="code-inline">Ctrl+E</span>, <span class="code-inline">Ctrl+I</span>, <span class="code-inline">Ctrl+Shift+F</span>, etc.) and existing card hotkeys can <strong>never be overwritten</strong>. If a user enters a conflicting or duplicate key, the system automatically blocks the overwrite, ignores the conflict, and suggests the next available free shortcut (e.g. <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Ctrl+2</span>) with a 1-click accept option.</li>
               </ul>
             </div>
           </div>
@@ -1455,6 +1491,36 @@
                   <td>Remembers window geometry, maximized state, size, and clicks.</td>
                 </tr>
                 <tr>
+                  <td>Universal Keyboard Shortcuts</td>
+                  <td class="badge-key">Ctrl+S / E / I / Shift+F / A / W / G</td>
+                  <td>Active Globally</td>
+                  <td>Instant system hotkeys to Save Preset (Ctrl+S), Export Backup (Ctrl+E), Import Backup (Ctrl+I), Add Folder (Ctrl+Shift+F), Add App/File (Ctrl+Shift+A / Ctrl+O), Add Web Link (Ctrl+Shift+W), and Make New Group (Ctrl+Shift+G / Ctrl+Shift+N).</td>
+                </tr>
+                <tr>
+                  <td>Canvas Right-Click Context Menu</td>
+                  <td class="badge-feature">Right-Click Empty Space in Grid</td>
+                  <td>Instant Menu</td>
+                  <td>Right-click anywhere on the empty grid canvas to quickly add folders, apps, websites, create new groups, import Quick Access, or manage presets.</td>
+                </tr>
+                <tr>
+                  <td>Strict Shortcut Protection &amp; Suggestion</td>
+                  <td class="badge-feature">Right-Click &rarr; ⌨️ Assign Shortcut Key</td>
+                  <td>Never Overwrites</td>
+                  <td>Reserved system shortcuts and duplicate card keys cannot be overwritten. Automatically displays live warning and provides a 1-click '💡 Suggest' button (e.g. Ctrl+1, Ctrl+2).</td>
+                </tr>
+                <tr>
+                  <td>Window Exit (✕) Warning</td>
+                  <td class="badge-feature">Close Button (✕) / Alt+F4</td>
+                  <td>Yes / No Dialog</td>
+                  <td>Prompts a clean confirmation dialog ("Are you sure you want to exit iROP Quick Access?") before closing to prevent accidental application shutdown.</td>
+                </tr>
+                <tr>
+                  <td>Total Groups Counter Badge</td>
+                  <td class="badge-feature">Groups Sidebar Header</td>
+                  <td>Live Badge</td>
+                  <td>Real-time count badge in the Groups header showing the exact total number of active workspace groups.</td>
+                </tr>
+                <tr>
                   <td>Documentation &amp; Help</td>
                   <td class="badge-feature">ℹ️ About &rarr; 📖 Help</td>
                   <td>—</td>
@@ -1526,12 +1592,14 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              আপনি ৪টি সহজ ও সুবিধাজনক উপায়ে শর্টকাট যোগ করতে পারেন:
+              আপনি ৬টি সহজ ও দ্রুততম উপায়ে শর্টকাট যোগ করতে পারেন:
               <ol>
-                <li><strong>ড্র্যাগ অ্যান্ড ড্রপ (সবচেয়ে দ্রুত):</strong> ডেস্কটপ বা ফাইল এক্সপ্লোরার থেকে যেকোনো ফোল্ডার, ফাইল, সফটওয়্যার অথবা <strong>যেকোনো ব্রাউজার থেকে সরাসরি ওয়েব লিংক/URL</strong> টেনে এনে উইন্ডোর ওপর ছেড়ে দিন।</li>
-                <li><strong>টপ মেনু বাটন:</strong> ওপরের <span class="code-inline">➕ Add Folder/App</span> বাটনে ক্লিক করে <span class="code-inline">📁 Add Folder or Drive...</span>, <span class="code-inline">⚡ Add Application or File...</span> অথবা <span class="code-inline">🌐 Add Website / Web Link...</span> নির্বাচন করুন।</li>
-                <li><strong>ওয়েব লিংক ডায়লগ:</strong> <span class="code-inline">🌐 Add Website / Web Link...</span> চাপলে আসা ডায়লগে ওয়েবসাইটের URL দিন (যেমন: <span class="code-inline">github.com</span> বা <span class="code-inline">https://google.com</span>) এবং পছন্দমতো টাইটেল লিখে সহজে অ্যাড করুন।</li>
-                <li><strong>স্বয়ংক্রিয় ইমপোর্ট:</strong> <span class="code-inline">📥 Import Quick Access</span> বা <span class="code-inline">📂 Import Open Windows</span> বাটনে এক ক্লিকেই একসাথে একাধিক শর্টকাট নিয়ে আসুন।</li>
+                <li><strong>ইউনিভার্সাল কিবোর্ড শর্টকাট (সবচেয়ে দ্রুত):</strong> কিবোর্ডে সরাসরি <span class="code-inline">Ctrl+Shift+F</span> চেপে ফোল্ডার/ড্রাইভ, <span class="code-inline">Ctrl+Shift+A</span> বা <span class="code-inline">Ctrl+O</span> চেপে সফটওয়্যার/ফাইল, <span class="code-inline">Ctrl+Shift+W</span> চেপে ওয়েবসাইট লিংক এবং <span class="code-inline">Ctrl+Shift+G</span> চেপে নতুন গ্রুপ যুক্ত করুন।</li>
+                <li><strong>ক্যানভাস রাইট-ক্লিক মেনু:</strong> গ্রিডের যেকোনো খালি জায়গায় রাইট-ক্লিক করলেই ফোল্ডার, ফাইল, ওয়েবসাইট যোগ এবং নতুন গ্রুপ তৈরির পূর্ণাঙ্গ মেনু চলে আসে।</li>
+                <li><strong>ড্র্যাগ অ্যান্ড ড্রপ:</strong> ডেস্কটপ বা ফাইল এক্সপ্লোরার থেকে যেকোনো ফোল্ডার, ড্রাইভ, সফটওয়্যার ফাইল (.exe/.lnk), প্রজেক্ট ফাইল অথবা <strong>যেকোনো ব্রাউজার থেকে সরাসরি ওয়েব লিংক/URL</strong> টেনে এনে উইন্ডোর ওপর ছেড়ে দিন।</li>
+                <li><strong>টপ মেনু বাটন:</strong> ওপরের <span class="code-inline">➕ Add Folder/App</span> বাটনে ক্লিক করে শর্টকাট হিন্টসহ ড্রপডাউন থেকে যেকোনো অপশন বেছে নিন।</li>
+                <li><strong>ওয়েব লিংক ডায়লগ:</strong> <span class="code-inline">🌐 Add Website / Web Link...</span> ডায়লগে ওয়েবসাইটের URL দিন এবং কাস্টম নাম দিয়ে সহজে অ্যাড করুন।</li>
+                <li><strong>স্বয়ংক্রিয় ইমপোর্ট:</strong> <span class="code-inline">📥 Import Quick Access</span> বা <span class="code-inline">📂 Import Open Windows</span> বাটনে এক ক্লিকেই উইন্ডোজের সমস্ত লোকেশন নিয়ে আসুন।</li>
               </ol>
             </div>
           </div>
@@ -1651,10 +1719,12 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              থিম বাটন এবং অ্যাবাউট বাটনের মাঝে থাকা <span class="code-inline">💾 Save</span> ড্রপডাউন থেকে:
+              থিম বাটন এবং অ্যাবাউট বাটনের মাঝে থাকা <span class="code-inline">💾 Save</span> ড্রপডাউন (ও ইউনিভার্সাল কিবোর্ড কমান্ড) থেকে:
               <ul>
-                <li><strong>Export Shortcuts...:</strong> আপনার সমস্ত শর্টকাট ও ক্লিক হিস্ট্রি একটি ফাইলে ব্যাকআপ আকারে সেভ করে রাখা যায়।</li>
-                <li><strong>Import Shortcuts...:</strong> যেকোনো পূর্ববর্তী ব্যাকআপ ফাইল থেকে শর্টকাটগুলো পুনরায় ফিরিয়ে আনা যায়।</li>
+                <li><strong>Save Current as Named Preset... (<span class="code-inline">Ctrl+S</span>):</strong> পছন্দমতো নাম দিয়ে (যেমন: <em>Work</em>, <em>Video Editing</em>, <em>Daily</em>) সম্পূর্ণ ওয়ার্কস্পেস ও গ্রুপের পূর্ণাঙ্গ প্রিসেট সেভ করা যায়।</li>
+                <li><strong>Export Shortcuts Backup... (<span class="code-inline">Ctrl+E</span>):</strong> সমস্ত শর্টকাট, গ্রুপ তালিকা, পিন ও ক্লিক হিস্ট্রি একটি পোর্টেবল JSON ফাইলে ব্যাকআপ সেভ করে রাখা যায়।</li>
+                <li><strong>Import Shortcuts Backup... (<span class="code-inline">Ctrl+I</span>):</strong> যেকোনো পূর্ববর্তী ব্যাকআপ ফাইল থেকে মুহূর্তেই সমস্ত শর্টকাট ও গ্রুপ ফিরিয়ে আনা যায়।</li>
+                <li><strong>Recent Presets (Last 10):</strong> সেভ করা বা ইমপোর্ট করা সর্বশেষ ১০টি প্রিসেট ফাইলে ১-ক্লিকেই সুইচ করা যায়।</li>
                 <li><strong>Clear All Shortcuts...:</strong> কনফার্মেশন নিয়ে এক ক্লিকেই সমস্ত শর্টকাট ক্লিয়ার করা যায়।</li>
               </ul>
             </div>
@@ -1790,10 +1860,11 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              যেকোনো কার্ডের ওপর মাউসের রাইট-ক্লিক করলে নতুন দুটি পাওয়ারফুল অপশন পাওয়া যায়:
+              যেকোনো কার্ডের ওপর মাউসের রাইট-ক্লিক করলে নতুন পাওয়ারফুল অপশন পাওয়া যায়:
               <ul>
-                <li><strong>⌨️ Assign Shortcut Key...:</strong> কার্ডটিতে যেকোনো কিবোর্ড হটকি (যেমন: <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Ctrl+Alt+D</span>, <span class="code-inline">F2</span>) যুক্ত করা যায়। অ্যাপ চালু থাকা অবস্থায় কিবোর্ডে উক্ত কি চাপলেই সাথে সাথে সেই ফোল্ডারটি ওপেন হয়ে যাবে। কার্ডের নিচে <span class="code-inline">[Ctrl+1]</span> ব্যাজ প্রদর্শিত হয়।</li>
-                <li><strong>🖥️ Create Desktop Shortcut:</strong> এক ক্লিকেই উক্ত ফোল্ডার বা ফাইলের জন্য আপনার উইন্ডোজ ডেস্কটপে একটি স্ট্যান্ডার্ড শর্টকাট (<span class="code-inline">.lnk</span>) ফাইল তৈরি করে দেয়।</li>
+                <li><strong>⌨️ Assign Shortcut Key...:</strong> কার্ডটিতে যেকোনো কিবোর্ড হটকি (যেমন: <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Alt+1</span>, <span class="code-inline">F2</span>) যুক্ত করা যায়। অ্যাপ চালু থাকা অবস্থায় কিবোর্ডে উক্ত কি চাপলেই সাথে সাথে সেই ফোল্ডার বা ওয়েবসাইট ওপেন হয়ে যাবে। কার্ডের নিচে <span class="code-inline">[Ctrl+1]</span> ব্যাজ প্রদর্শিত হয়।</li>
+                <li><strong>কঠোর ওভাররাইট সুরক্ষা ও সাজেশন:</strong> ইউনিভার্সাল সিস্টেম শর্টকাট (<span class="code-inline">Ctrl+S</span>, <span class="code-inline">Ctrl+E</span>, <span class="code-inline">Ctrl+I</span>, <span class="code-inline">Ctrl+Shift+F</span> ইত্যাদি) অথবা অন্য কোনো কার্ডের শর্টকাটের সাথে মিলে গেলে এটি <strong>কখনোই ওভাররাইট হতে দেবে না</strong>। ডায়লগে লাল ওয়ার্নিং আসবে এবং ১-ক্লিকেই পরবর্তী উন্মুক্ত নিরাপদ হটকি বেছে নেওয়ার জন্য <span class="code-inline">💡 Suggest: [Ctrl+1]</span> বাটন থাকবে।</li>
+                <li><strong>🖥️ Create Desktop Shortcut:</strong> এক ক্লিকেই ফোল্ডার বা অ্যাপের জন্য ডেস্কটপে <span class="code-inline">.lnk</span> ফাইল এবং ওয়েবসাইটের জন্য <span class="code-inline">.url</span> ইন্টারনেট শর্টকাট ফাইল তৈরি করে দেয়।</li>
               </ul>
             </div>
           </div>
@@ -1908,7 +1979,8 @@
                 <li><strong>ডাইনামিক "+ Add Group" বাটন:</strong> নতুন গ্রুপ তৈরি করার <span class="code-inline">➕ Add Group</span> বাটনটি সর্বশেষ গ্রুপের ঠিক নিচে থাকে এবং নতুন গ্রুপ যুক্ত হওয়ার সাথে সাথে স্বয়ংক্রিয়ভাবে তার নিচে নেমে যায়।</li>
                 <li><strong>🎨 গ্রুপ ট্যাব কালারিং:</strong> যেকোনো গ্রুপে রাইট-ক্লিক করে <span class="code-inline">🎨 Group Color</span> মেনু থেকে ৮টি আকর্ষনীয় কালার প্যালেট (Slate Navy, Ocean Blue, Forest Mint, Soft Lavender, Warm Sand ইত্যাদি) দিয়ে গ্রুপ ট্যাবে নিজস্ব রং দিতে পারবেন। এই কালার অ্যাপ বন্ধ করে পুনরায় চালু করলেও বা প্রিসেটে সবসময় সংরক্ষিত থাকবে।</li>
                 <li><strong>টপ গ্রুপ ডিফল্ট:</strong> তালিকার প্রথম <em>Default</em> গ্রুপটি স্থায়ী এবং সুরক্ষিত থাকে।</li>
-                <li><strong>নিরাপদ গ্রুপ ডিলিট:</strong> কোনো কাস্টম গ্রুপ ডিলিট করলে ভেতরের কার্ডগুলো নষ্ট না হয়ে স্বয়ংক্রিয়ভাবে সুরক্ষিত <em>Default</em> গ্রুপে স্থানান্তরিত হয়।</li>
+                <li><strong>টোটাল গ্রুপ কাউন্টিং ব্যাজ:</strong> সাইডবারের শীর্ষে '📁 Groups' এর পাশে রিয়েল-টাইম ব্যাজে মোট কয়টি গ্রুপ রয়েছে তা সবসময় প্রদর্শিত থাকে।</li>
+                <li><strong>কার্ডসহ সম্পূর্ণ গ্রুপ ডিলিট:</strong> কোনো গ্রুপ ডিলিট করার সময় কনফার্মেশন ডায়লগ আসবে এবং Yes কনফার্ম করলেই গ্রুপের সব কার্ড সহ ডিলিট হবে। No চাপলে কোনো কিছুই ডিলিট না হয়ে বাতিল হবে।</li>
                 <li><strong>সহজ ড্র্যাগ-মুভ:</strong> যেকোনো কার্ডে রাইট-ক্লিক করে <span class="code-inline">📁 Move to Group</span> চাপুন, অথবা গ্রিড থেকে মাউস দিয়ে কার্ড টেনে সাইডবারের যেকোনো গ্রুপের ওপর ড্রপ করলেই কার্ডটি সেই গ্রুপে স্থানান্তরিত হবে!</li>
               </ul>
             </div>
@@ -1931,6 +2003,36 @@
                 <li><strong>নিবেদিত "📁 Change Location" বাটন:</strong> রিসেন্ট ডাউনলোড ট্যাবে থাকা অবস্থায় একটি স্পষ্ট <span class="code-inline">📁 Change Location</span> বাটন দেখতে পাবেন। এতে ক্লিক করে আপনি যেকোনো প্রজেক্ট বা আউটপুট ফোল্ডার নির্বাচন করতে পারবেন। উক্ত ফোল্ডারে আসা নতুন ফাইল বা ফোল্ডারগুলো সাথে সাথে লাইভ তালিকায় চলে আসবে!</li>
                 <li><strong>আরামদায়ক ৪১০px ডিফল্ট প্রস্থ:</strong> প্যানেলটির প্রস্থ ৪১০px নির্ধারিত করায় দুটি ট্যাব, ফাইলের পূর্ণ নাম এবং ডান পাশের অ্যাকশন বাটনসমূহ পর্যাপ্ত স্পেস নিয়ে পরিষ্কারভাবে প্রদর্শিত হয়।</li>
                 <li><strong>সারির অ্যাকশন বাটনসমূহ:</strong> তালিকায় থাকা যেকোনো ফাইলে ক্লিক করে ওপেন করা, <span class="code-inline">📂</span> বাটনে এক্সপ্লোরারে ফাইলটি চিহ্নিত করা এবং <span class="code-inline">＋</span> বাটনে ১-ক্লিকেই মূল শর্টকাট গ্রিডের <strong>সক্রিয় গ্রুপে</strong> পিন করার সুবিধা রয়েছে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ২২: ইউনিভার্সাল কিবোর্ড শর্টকাট, ক্যানভাস রাইট-ক্লিক মেনু ও ক্লোজ ওয়ার্নিং কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <strong>গতিশীল শর্টকাট ও প্রটেকশন সুবিধা:</strong>
+              <ul>
+                <li><strong>উইন্ডো ক্লোজ (✕) ওয়ার্নিং:</strong> অ্যাপের উপরের ডানপাশের ক্রস (✕) বাটনে চাপ দিলে ভুলবশত অ্যাপ বন্ধ হওয়া রোধ করতে একটি স্পষ্ট Yes/No কনফার্মেশন ডায়লগ আসবে।</li>
+                <li><strong>ক্যানভাস রাইট-ক্লিক মেনু:</strong> কার্ড গ্রিডের যেকোনো খালি ব্যাকগ্রাউন্ডে রাইট-ক্লিক করলেই ফোল্ডার, ফাইল, ওয়েবসাইট যোগ করা, নতুন গ্রুপ তৈরি করা এবং প্রিসেট সেভ/এক্সপোর্টের মেনু চলে আসে।</li>
+                <li><strong>ইউনিভার্সাল কিবোর্ড শর্টকাট:</strong>
+                  <ul>
+                    <li><span class="code-inline">Ctrl+S</span>: Save Current as Preset... (বর্তমান প্রিসেট সেভ)</li>
+                    <li><span class="code-inline">Ctrl+E</span>: Export Shortcuts Backup... (ব্যাকআপ এক্সপোর্ট)</li>
+                    <li><span class="code-inline">Ctrl+I</span>: Import Shortcuts Backup... (ব্যাকআপ ইমপোর্ট)</li>
+                    <li><span class="code-inline">Ctrl+Shift+F</span>: Add Folder or Drive... (ফোল্ডার যোগ)</li>
+                    <li><span class="code-inline">Ctrl+Shift+A</span> / <span class="code-inline">Ctrl+O</span>: Add Application / File... (সফটওয়্যার/ফাইল যোগ)</li>
+                    <li><span class="code-inline">Ctrl+Shift+W</span>: Add Website / Web Link... (ওয়েবসাইট লিংক যোগ)</li>
+                    <li><span class="code-inline">Ctrl+Shift+G</span> / <span class="code-inline">Ctrl+Shift+N</span>: Make New Group... (নতুন গ্রুপ তৈরি)</li>
+                  </ul>
+                </li>
+                <li><strong>কঠোর কনফ্লিক্ট প্রটেকশন ও বিকল্প কী সাজেশন:</strong> ইউনিভার্সাল সিস্টেম শর্টকাট (<span class="code-inline">Ctrl+S</span>, <span class="code-inline">Ctrl+E</span>, <span class="code-inline">Ctrl+I</span>, <span class="code-inline">Ctrl+Shift+F</span> ইত্যাদি) অথবা পূর্বের কোনো কার্ডের শর্টকাটের সাথে মিলে গেলে <strong>কখনোই ওভাররাইট হবে না</strong>। সিস্টেম স্বয়ংক্রিয়ভাবে ওভাররাইট ব্লক ও ইগনোর করবে এবং সাথে সাথে পরবর্তী উন্মুক্ত নিরাপদ শর্টকাট (যেমন: <span class="code-inline">Ctrl+1</span>, <span class="code-inline">Ctrl+2</span>) সাজেস্ট করবে যা ১-ক্লিকেই গ্রহণ করা যায়।</li>
               </ul>
             </div>
           </div>
@@ -2121,6 +2223,36 @@
                   <td class="badge-feature">অটোমেটিক অন একজিট</td>
                   <td class="badge-key">সক্রিয়</td>
                   <td>পরের বার ওপেন করলে হুবহু একই অবস্থায় পাওয়া যায়।</td>
+                </tr>
+                <tr>
+                  <td>ইউনিভার্সাল কিবোর্ড শর্টকাট</td>
+                  <td class="badge-key">Ctrl+S / E / I / Shift+F / A / W / G</td>
+                  <td>সর্বত্র সক্রিয়</td>
+                  <td>প্রিসেট সেভ (Ctrl+S), ব্যাকআপ এক্সপোর্ট (Ctrl+E), ব্যাকআপ ইমপোর্ট (Ctrl+I), ফোল্ডার অ্যাড (Ctrl+Shift+F), সফটওয়্যার/ফাইল অ্যাড (Ctrl+Shift+A / Ctrl+O), ওয়েবসাইট লিংক অ্যাড (Ctrl+Shift+W) এবং নতুন গ্রুপ তৈরি (Ctrl+Shift+G / Ctrl+Shift+N)।</td>
+                </tr>
+                <tr>
+                  <td>ক্যানভাস রাইট-ক্লিক মেনু</td>
+                  <td class="badge-feature">গ্রিডের খালি জায়গায় রাইট-ক্লিক</td>
+                  <td>ইনস্ট্যান্ট মেনু</td>
+                  <td>কার্ড গ্রিডের যেকোনো খালি ব্যাকগ্রাউন্ডে রাইট-ক্লিক করে ফোল্ডার, ফাইল, ওয়েবসাইট যোগ, নতুন গ্রুপ তৈরি এবং প্রিসেট সেভ/এক্সপোর্টের সুবিধাজনক মেনু।</td>
+                </tr>
+                <tr>
+                  <td>কঠোর শর্টকাট প্রটেকশন ও সাজেশন</td>
+                  <td class="badge-feature">রাইট-ক্লিক &rarr; ⌨️ Assign Shortcut Key</td>
+                  <td>ওভাররাইট নিষিদ্ধ</td>
+                  <td>সিস্টেম শর্টকাট বা অন্য কার্ডের কী কখনোই ওভাররাইট হবে না। লাইভ সতর্কতা দেখাবে এবং ১-ক্লিকেই পরবর্তী উন্মুক্ত নিরাপদ শর্টকাট সাজেস্ট করবে ('💡 Suggest')।</td>
+                </tr>
+                <tr>
+                  <td>উইন্ডো ক্লোজ (✕) কনফার্মেশন</td>
+                  <td class="badge-feature">ক্লোজ বাটন (✕) / Alt+F4</td>
+                  <td>Yes / No ডায়লগ</td>
+                  <td>ভুলবশত অ্যাপ বন্ধ হওয়া রোধ করতে এক্সিট করার পূর্বে স্পষ্ট Yes/No সতর্কবার্তা প্রদর্শন করে।</td>
+                </tr>
+                <tr>
+                  <td>টোটাল গ্রুপ কাউন্টিং ব্যাজ</td>
+                  <td class="badge-feature">গ্রুপ সাইডবারের শীর্ষ হেডার</td>
+                  <td>লাইভ কাউন্টার</td>
+                  <td>সাইডবারের শীর্ষে '📁 Groups' এর পাশে মোট সক্রিয় গ্রুপের সংখ্যা রিয়েল-টাইম ব্যাজে সবসময় প্রদর্শন করে।</td>
                 </tr>
                 <tr>
                   <td>হেল্প ও গাইড</td>
